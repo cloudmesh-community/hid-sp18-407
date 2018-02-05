@@ -1,5 +1,4 @@
 from eve import Eve
-from student import Student
 import platform
 import psutil
 import json
