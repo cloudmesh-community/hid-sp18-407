@@ -18,6 +18,7 @@ def times():
 
 	return times
 
+@app.route('/memory', methods=['GET'])
 def memory():
 	memory = {}
 	allmem = psutil.virtual_memory('/')
