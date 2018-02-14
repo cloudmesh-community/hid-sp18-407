@@ -14,20 +14,19 @@
 * 2018/02/08 installed Standalone spark on personal laptop (Ubuntu 16.04)  
 
 # Theory
-
 * 2018/01/22 Watched video - creating a REST service
 * 2018/02/03 Read mongodb documentation and tutorials 
 * 2018/02/12 Read Spark handbook/tutorial
-* 
+* 2018/02/14 researched articles explaining RESTful API development and use case
 
 # Practice
-
 * 2018/01/25 Downloaded Virtual box and installed linux ubuntu vm on Windows laptop
 * 2018/02/04 practiced Vim/Linux shell commands with previous tutorial
-* 2018/02/04 attempted to run exercises on Windows 10 natively; unsuccessful.
-* 2018/02/08 
+* 2018/02/08 attempted to run exercises on Windows 10 natively; unsuccessful.
+* 2018/02/14 redid exercise to develop REST service with Eve
 
 # Writing
 
 * 2018/02/03 Installed and practiced mongodb
+* 2018/02/04 revisited eve rest service examples. 
 
