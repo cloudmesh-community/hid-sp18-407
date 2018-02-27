@@ -1,0 +1,12 @@
+\section{NoSQL}
+\index{NoSQL}
+
+NoSQL, or "Not only SQL" represents a class of several technologies
+that function as distributed database storage and operation, including
+Cassandra and HBase.  Characteristics include databases that are 
+"schema-less at design-time and 'schema-on-read' at run time."  
+\cite{hid-sp18-407-nosql}  Unlike relational database management systems, 
+NoSQL databases have no pre-defined relation with any other object. Finally,
+NoSQL structure and query typically avoids joins at all costs. \cite{hid-sp18-407-nosql}
+NoSQL databases are built on distributed networks and are favorable due to 
+superior speed and performance over traditional RDBMS.  
