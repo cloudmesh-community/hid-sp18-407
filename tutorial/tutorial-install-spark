@@ -6,8 +6,8 @@
 * Eight or more CPU cores
 * 10 GB or greater network speed
 * Four or more disks in JBOD configuration
-* Java installed
-* Python installed
+* Java installed, 1.6 or greater
+* Python installed, supports both 2x and 3
 
 ## Downloading pre-built packages. 
 * spark.apache.org/downloads.html
