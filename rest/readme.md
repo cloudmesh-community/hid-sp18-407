@@ -9,4 +9,9 @@ Programs:
     settings.py
     client.py
 
-It isn't pretty, but it works! 
+Initiate an instance of mongodb
+In a separate terminal window, run: 
+python run2.py
+
+In a browser, you can access the REST service by typing
+127.0.0.1:5000/times or /computer. 
