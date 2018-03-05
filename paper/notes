@@ -1,0 +1,20 @@
+RDD - what is an RDD?  RDD stands for resilient distributed database, which is the Spark abstraction for data storage.  
+
+
+Spark Session
+As compared to Spark SQL
+
+Spark SQL
+Spark SQL is the entry point for working with structured data in dataframes:  
+- http://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.sql.SQLContext
+- Spark SQL has a nice JDBC interface for reading JSON and Hive files. 
+
+Spark Streaming
+This is Spark's module for big data functionality.  It interacts with other Spark modules such as MLib. 
+
+MLib
+Spark's machine learning library. 
+
+Interactivity. 
+Spark runs on the JVM and interacts with Python, Java, Scala and other high-level languages. 
+
