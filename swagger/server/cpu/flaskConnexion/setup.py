@@ -18,10 +18,10 @@ REQUIRES = ["connexion"]
 setup(
     name=NAME,
     version=VERSION,
-    description="cpuinfo",
+    description="wordCount",
     author_email="",
     url="",
-    keywords=["Swagger", "cpuinfo"],
+    keywords=["Swagger", "wordCount"],
     install_requires=REQUIRES,
     packages=find_packages(),
     package_data={'': ['swagger/swagger.yaml']},
@@ -29,7 +29,7 @@ setup(
     entry_points={
         'console_scripts': ['swagger_server=swagger_server.__main__:main']},
     long_description="""\
-    A simple service to get cpuinfo as an example of using swagger -2.0 specification and codegen
+    A simple service to count words using Python and Spark
     """
 )
 

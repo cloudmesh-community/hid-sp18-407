@@ -1,0 +1,37 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: "wordCount"
+  description: "A simple service to count words using Python and Spark"
+  termsOfService: "http ://swagger.io/terms/"
+  contact:
+    name: "PySpark word count Application"
+    license:
+      name: "Apache"
+host: "localhost:8080"
+basePath: "/count"
+schemes:
+  - "http"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+paths:
+  /count:
+    get:
+      description: "Returns word count information"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Word Count"
+          schema: 
+            $ref: "/definitions/words"
+definitions:
+  Words: 
+    type: "object"
+    required:
+      - "model"
+    properties: 
+      model: 
+        type: "string"

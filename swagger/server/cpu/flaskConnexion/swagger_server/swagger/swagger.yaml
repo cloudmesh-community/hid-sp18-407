@@ -1,15 +1,14 @@
 ---
 swagger: "2.0"
 info:
-  description: "A simple service to get cpuinfo as an example of using swagger -2.0\
-    \ specification and codegen"
+  description: "A simple service to count words using Python and Spark"
   version: "0.0.1"
-  title: "cpuinfo"
+  title: "wordCount"
   termsOfService: "http ://swagger.io/terms/"
   contact:
-    name: "Cloudmesh REST Service Example "
+    name: "PySpark word count Application"
 host: "localhost:8080"
-basePath: "/api"
+basePath: "/count"
 schemes:
 - "http"
 consumes:
@@ -17,21 +16,21 @@ consumes:
 produces:
 - "application/json"
 paths:
-  /cpu:
+  /count:
     get:
-      description: "Returns cpu information"
-      operationId: "cpu_get"
+      description: "Returns word count information"
+      operationId: "count_get"
       produces:
       - "application/json"
       parameters: []
       responses:
         200:
-          description: "CPU Info"
+          description: "Word Count"
           schema:
-            $ref: "#/definitions/cpu"
+            $ref: "#/definitions/words"
       x-swagger-router-controller: "swagger_server.controllers.default_controller"
 definitions:
-  CPU:
+  Words:
     type: "object"
     required:
     - "model"
