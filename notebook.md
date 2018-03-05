@@ -3,6 +3,8 @@
 * 2018/01/13 Attended online meeting
 * 2018/02/03 posted request for teammate
 * 2018/02/04 attended office hours w/Tyler and Prof. vL
+* 2018/03/04 attended office hours w/Tyler
+* 2018/03/05 attended office hours w/Prof
 
 # Logistics
 
@@ -24,9 +26,10 @@
 * 2018/02/04 practiced Vim/Linux shell commands with previous tutorial
 * 2018/02/08 attempted to run exercises on Windows 10 natively; unsuccessful.
 * 2018/02/14 redid exercise to develop REST service with Eve
-
-# Writing
-
 * 2018/02/03 Installed and practiced mongodb
 * 2018/02/04 revisited eve rest service examples. 
+
+# Writing
+* 
+
 
