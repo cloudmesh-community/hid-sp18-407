@@ -8,35 +8,44 @@ from swagger_server import util
 
 import os, platform, subprocess, re
 
-def get_processor_name():
-	if platform.system() == "Windows":
-		return platform.processor
+import os
 
-	elif platform.system() == "Darwin":
-		command = "/usr/sbin/sysctl -n machdep.cpu.brand_string"
-		return subprocess.check_output(command, shell=True).strip()
-	
-	elif platform.system() == "Linux":
-		command = "cat /proc/cpuinfo"
-		all_info = subprocess.check_output(command, shell=True).strip()
-		for line in all_info.split("\n"):
-			if "model name" in line:
-				return re.sub(".*model name.*",  "", line, 1)
-	
-	return "cannot find cpu info"
+raw = open("/home/khickman/PycharmProjects/DSOR/spark/resources/data.txt")
+data = raw.read()
+raw.close()
 
+def wordCountApp(textFile):
 
+    lines = textFile.split("\n")
+    words = textFile.split()
+
+    wordCount = 0
+    lineCount = 0
+
+    #print(lines[0:10])
+    #print(words[0:10])
+
+    for word in words:
+        if len(word) < 3:
+            continue
+        wordCount += 1
+
+    for line in lines:
+        if len(line) < 1:
+            continue
+        lineCount += 1
+
+    print(wordCount)
+    print(lineCount)
+
+wordCountApp(data)
 
 
 def cpu_get():  # noqa: E501
-    """cpu_get
-
-    Returns cpu information # noqa: E501
-
-
-    :rtype: Cpu
     """
-    return CPU(get_processor_name())
+	Initiates word count app
+    """
+    return App(wordCountApp(data))
 
 
 
