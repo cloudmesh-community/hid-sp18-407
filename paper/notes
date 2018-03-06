@@ -1,3 +1,18 @@
+Notes: 
+- Page limit 8 pages. Should be about why this tech is important, why it's exciting, what does it do? 
+- Spark is ok.  516 is Hadoop related. 
+- Tutorial - tell about technology and build tutorial.  Precursor to project. 
+- Project = how do you actually run project so a TA can actually replicate. Shouldn't have 50 steps - how does a makefile work? 
+- Makefile is super important. Learn how to create/run a makefile! 
+  - don't check in any code that we haven't developed.  e.g. swagger codegen.  
+  - we can ship code that doesn't require all the code.  
+- Hadoop...look at chameleon cloud's hadoop deployment.  
+- Containers. 
+- 516 class is a little less stressful - intro course! Teaching python, how to write a paper. 
+- Swagger service - we will use the swagger service in the project.  
+- Can you recommend ways to get exposure to distributed computing practice?  
+
+
 RDD - what is an RDD?  RDD stands for resilient distributed database, which is the Spark abstraction for data storage.  
 
 
