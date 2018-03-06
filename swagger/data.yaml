@@ -26,9 +26,9 @@ paths:
         "200":
           description: "Word Count"
           schema: 
-            $ref: "/definitions/words"
+            $ref: "#/definitions/words"
 definitions:
-  Words: 
+  words: 
     type: "object"
     required:
       - "model"
