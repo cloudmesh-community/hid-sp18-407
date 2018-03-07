@@ -8,9 +8,7 @@ Notes:
   - we can ship code that doesn't require all the code.  
 - Hadoop...look at chameleon cloud's hadoop deployment.  
 - Containers. 
-- 516 class is a little less stressful - intro course! Teaching python, how to write a paper. 
 - Swagger service - we will use the swagger service in the project.  
-- Can you recommend ways to get exposure to distributed computing practice?  
 
 
 RDD - what is an RDD?  RDD stands for resilient distributed database, which is the Spark abstraction for data storage.  
@@ -29,6 +27,10 @@ This is Spark's module for big data functionality.  It interacts with other Spar
 
 MLib
 Spark's machine learning library. 
+https://spark.apache.org/docs/1.2.2/ml-guide.html
+
+schema rdd
+https://spark.apache.org/docs/1.2.2/api/scala/index.html#org.apache.spark.sql.SchemaRDD
 
 Interactivity. 
 Spark runs on the JVM and interacts with Python, Java, Scala and other high-level languages. 
