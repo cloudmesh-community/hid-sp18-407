@@ -7,7 +7,6 @@
 * 2018/03/05 attended office hours w/Prof
 
 # Logistics
-
 * 2018/01/13 Read the entire class overview section
 * 2018/01/15 Watched videos - class management and teaching cloud computing
 * 2018/01/25 Installed python venv 3.6 on vm
@@ -28,8 +27,13 @@
 * 2018/02/14 redid exercise to develop REST service with Eve
 * 2018/02/03 Installed and practiced mongodb
 * 2018/02/04 revisited eve rest service examples. 
+* 2018/03/07 followed issue - "unresolvable json pointer" (ref: github workarounds)
+* 2018/03/07 killrweather app from databricks compile
 
 # Writing
-* 
+* 2018/03/01 start research
+* 2018/03/03 start skeleton
+* 2018/03/07 research spark - rdd
+* 2018/03/08 research spark MlLib, spark streaming, RDD abstraction
 
 

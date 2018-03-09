@@ -8,7 +8,13 @@ Notes:
   - we can ship code that doesn't require all the code.  
 - Hadoop...look at chameleon cloud's hadoop deployment.  
 - Containers. 
-- Swagger service - we will use the swagger service in the project.  
+- Swagger service - we will use the swagger service in the project. 
+
+
+What about a service that sends and retrieves data using spark streaming. 
+What if you typed in twitter, it might give you the most current 50 tweets. 
+If you type in "news" it might give you the most current 50 news stories.  
+The Service is going to store these in a mongodb?  
 
 
 RDD - what is an RDD?  RDD stands for resilient distributed database, which is the Spark abstraction for data storage.  
