@@ -1,0 +1,16 @@
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{todonotes}
+
+%\usepackage{endfloat}
+%\renewcommand{\efloatseparator}{\mbox{}} % no new page between figures
+
+\usepackage{booktabs} % For formal tables
+
+\settopmatter{printacmref=false} % Removes citation information below abstract
+\renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
+\pagestyle{plain} % removes running headers
+
+
+\newcommand{\TODO}[1]{\todo[inline]{#1}}
+\newcommand{\DONE}[1]{DONE: \todo[inline,color=green!30]{#1}}

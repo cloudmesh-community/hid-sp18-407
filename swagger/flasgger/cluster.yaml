@@ -1,0 +1,54 @@
+---
+basePath: ""
+definitions:
+  Cluster:
+    type: string
+  Server:
+    properties:
+      server_name:
+        items:
+          "$ref": "#/definitions/Cluster"
+        type: array
+    type: object
+info:
+  description: Cloudmesh Cluster API
+  termsOfService: "/tos"
+  title: Clusters API
+  version: 0.0.2
+paths:
+  "/clusters/{server}/":
+    get:
+      consumes:
+        - application/json
+      description: gets the cluster servers
+      operationId: get_clusters
+      parameters:
+        - default: all
+          description: Which server to filter?
+          in: path
+          name: server
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        200:
+          description: A list of clusters (may be filtered by server)
+          examples:
+            red:
+              - red00
+              - red01
+              - red02
+          schema:
+            "$ref": "#/definitions/Server"
+      schemes:
+        - http
+        - https
+      security:
+        clusters_auth:
+          - write:clusters
+          - read:clusters
+      summary: Example using a dictionary as specification
+      tags:
+        - clusters
+swagger: '2.0'

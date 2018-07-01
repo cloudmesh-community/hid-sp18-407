@@ -1,0 +1,51 @@
+% chktex-file 1
+%\documentclass{article}
+
+\documentclass{../../hid-sample/tex/format/laszewski}
+
+
+\addbibresource{hid-sample.bib}  
+\defbibheading{bibempty}{}
+
+\graphicspath{%
+{./}%
+{../../hid-sample/tex/format/images/}%
+}
+
+\chapterimage{chapter.png}
+
+\newcommand{\TITLE}{Handbook of \\ Clouds and Big Data}
+\newcommand{\SUBTITLE}{Theory and Practice}
+\newcommand{\AUTHOR}{Gregor von Laszewski}
+\newcommand{\EMAIL}{laszewski@gmail.com}
+\newcommand{\LOCATION}{url}
+
+
+
+\begin{document}
+
+\index{Test}
+
+%\maketitle
+
+% input all 5 of your abstracts here to test them. Each will have its own tex file.
+\input{abstract-xms}
+
+% replace sample with your hid. make sure you have a filename
+% accordingly note your hid is something like hid-sp18-999
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\addcontentsline{toc}{chapter}{\textcolor{ocre}{Bibliography}}
+
+\section*{References}
+\printbibliography[heading=bibempty]
+
+\cleardoublepage
+\phantomsection
+\setlength{\columnsep}{0.75cm}
+\addcontentsline{toc}{chapter}{\textcolor{ocre}{Index}}
+\printindex
+
+
+\end{document}
