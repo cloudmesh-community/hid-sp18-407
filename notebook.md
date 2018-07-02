@@ -1,25 +1,37 @@
 # Meetings
 
-* 2018/01/13 Online Meeting attended
+* 2018/01/13 Attended online meeting
+* 2018/02/03 posted request for teammate
+* 2018/02/04 attended office hours w/Tyler and Prof. vL
+* 2018/03/04 attended office hours w/Tyler
+* 2018/03/05 attended office hours w/Prof
 
-
-# Weeks with no progress
-* 2018/01/18 - 2018/01/19 For a week not participated in class due to interview planed makeup of x hours in week 2018/02/18 - 2018/02/19
-
-# Logistic
-
-* 2018/01/11 Gain access to github.com
+# Logistics
+* 2018/01/13 Read the entire class overview section
+* 2018/01/15 Watched videos - class management and teaching cloud computing
+* 2018/01/25 Installed python venv 3.6 on vm
+* 2018/02/03 Established github/chameleon/futuresystems profiles
+* 2018/02/04 reimaged personal laptop w/Ubuntu 16.04
+* 2018/02/08 installed Standalone spark on personal laptop (Ubuntu 16.04)  
 
 # Theory
-
-* 2018/01/12 Read Handbook pp. 1-46, 61-94
+* 2018/01/22 Watched video - creating a REST service
+* 2018/02/03 Read mongodb documentation and tutorials 
+* 2018/02/12 Read Spark handbook/tutorial
+* 2018/02/14 researched articles explaining RESTful API development and use case
 
 # Practice
-
-* 2018/02/03 Completed REST API assignment
+* 2018/01/25 Downloaded Virtual box and installed linux ubuntu vm on Windows laptop
+* 2018/02/04 practiced Vim/Linux shell commands with previous tutorial
+* 2018/02/08 attempted to run exercises on Windows 10 natively; unsuccessful.
+* 2018/02/14 redid exercise to develop REST service with Eve
+* 2018/02/03 Installed and practiced mongodb
+* 2018/02/04 revisited eve rest service examples. 
+* 2018/03/07 followed issue - "unresolvable json pointer" (ref: github workarounds)
+* 2018/03/07 killrweather app from databricks compile
 
 # Writing
-
-* 2018/01/11 Posted bio to Piazza
-* 2018/01/13 Installed MacTeX and Jabref
-* 2018/04/03 Finished Research Paper
+* 2018/03/01 start research
+* 2018/03/03 start skeleton
+* 2018/03/07 research spark - rdd
+* 2018/03/08 research spark MlLib, spark streaming, RDD abstraction

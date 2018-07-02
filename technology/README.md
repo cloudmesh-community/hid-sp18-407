@@ -6,6 +6,7 @@ First you need to check out the repositories.
     cd ~/github/cloudmesh-community
     git clone https://github.com/cloudmesh-community/hid-sample.git
 
+
 You will need to pull the hid-sample directory on a weekly
 schedule with
 
