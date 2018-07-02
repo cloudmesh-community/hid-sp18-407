@@ -153,3 +153,6 @@ target/
 *.sln
 
 paper/report.pdf
+paper-instructions.md
+paper-instructions.pdf
+
