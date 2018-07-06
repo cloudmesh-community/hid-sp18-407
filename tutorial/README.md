@@ -1,1 +1,1 @@
-put rure tutorial here
+Tutorial. Amazon EKS, Elastic Compute for Kubernetes

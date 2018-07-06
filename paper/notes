@@ -11,6 +11,69 @@ Notes:
 - Swagger service - we will use the swagger service in the project. 
 
 
+Paper Topic: 
+Vagrant.  
+Vagrant is a command-line utility for managing virtual environments. Developed in 2009 by Mitchell Hashimoto and John Bender, Vagrant was originally designed to replace the 2010-era web development practices associated with largely static web environments.  With the advent of dynamic languages such as Python, Ruby, and other extensible frameworks, the need arose for portable and disposable development environments that could be rapidly created and just as quickly destroyed.  
+
+Mitchell Hashimoto and John Bender formed Hashicorp in 2010 to work on Vagrant full-time after starting the software as a side project in the late 2000's. Other projects include Vault, Serf, Packer, and **insert company information here**.  
+
+Vagrant builds on virtualized environments like VirtualBox and VMware. 
+
+Built to combat "Works on my machine" . 
+
+"Vagrant puts your development environment into a virtual machine".  Oreilly/Hashimoto
+
+John Bender. 
+
+License?  
+
+Commands https://www.linuxjournal.com/content/introducing-vagrant: 
+
+init — create the base configuration file.
+    up — start a new instance of the virtual machine.
+    suspend — suspend the running guest.
+    halt — stop the running guest, similar to hitting the power button on a real machine.
+    resume — restart the suspended guest.
+    reload — reboot the guest.
+    status — determine the status of vagrant for the current vagrantfile.
+    provision — run the provisioning commands.
+    destroy — remove the current instance of the guest, delete the virtual disk and associated files.
+    box — the set of commands used to add, list, remove or repackage box files.
+    package — used for the creation of new box files.
+    ssh — ssh to a running guest. 
+
+Paper citations: 
+Vagrant documentation: Official site: https://www.vagrantup.com/docs/index.html
+
+Linux Journal: https://www.linuxjournal.com/content/introducing-vagrant:  (Introducing Vagrant, history)
+
+Vagrant: Up and Running, o'reilly media. Mitchell Hashimoto
+
+# Core concepts: 
+## Virtualization
+Virtual environments are disposable. 
+"guests can be base for a project without contamination" **what does this mean exactly?  Translate this concept into practical. 
+
+## Vagrant File: 
+Vagrantfiles are like makefiles, written in Ruby syntax. 
+
+##Boxes.  What are Vagrant boxes?  Base computer images.  
+List of vagrant boxes. 
+
+
+
+
+
+
+
+
+
+
+
+
+____________________________________________________
+
+Project ideas: 
 What about a service that sends and retrieves data using spark streaming. 
 What if you typed in twitter, it might give you the most current 50 tweets. 
 If you type in "news" it might give you the most current 50 news stories.  

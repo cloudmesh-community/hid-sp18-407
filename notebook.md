@@ -6,6 +6,8 @@
 * 2018/03/04 attended office hours w/Tyler
 * 2018/03/05 attended office hours w/Prof
 
+No activity between 3/5 and 6/1 due to incomplete
+
 # Logistics
 * 2018/01/13 Read the entire class overview section
 * 2018/01/15 Watched videos - class management and teaching cloud computing
@@ -29,9 +31,11 @@
 * 2018/02/04 revisited eve rest service examples. 
 * 2018/03/07 followed issue - "unresolvable json pointer" (ref: github workarounds)
 * 2018/03/07 killrweather app from databricks compile
+* 2018/06/15 reinitialized local repository in git, pushed changes to remote. 
 
 # Writing
 * 2018/03/01 start research
 * 2018/03/03 start skeleton
 * 2018/03/07 research spark - rdd
 * 2018/03/08 research spark MlLib, spark streaming, RDD abstraction
+* 2018/06/15 aim is to set a NLP application on a spark cluster using Raspberry pis. 
