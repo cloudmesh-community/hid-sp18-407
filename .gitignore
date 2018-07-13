@@ -146,6 +146,10 @@ target/
 #Ipython Notebook
 .ipynb_checkpoints
 
+#Images
+.png
+.gif
+
 # Editor
 *.suo
 *.ntvs*
@@ -155,4 +159,5 @@ target/
 paper/report.pdf
 paper-instructions.md
 paper-instructions.pdf
+project-paper/images
 

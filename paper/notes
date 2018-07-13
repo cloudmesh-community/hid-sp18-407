@@ -1,31 +1,218 @@
 Notes: 
 - Page limit 8 pages. Should be about why this tech is important, why it's exciting, what does it do? 
-- Spark is ok.  516 is Hadoop related. 
 - Tutorial - tell about technology and build tutorial.  Precursor to project. 
-- Project = how do you actually run project so a TA can actually replicate. Shouldn't have 50 steps - how does a makefile work? 
+- Project = how do you actually run project so a TA can actually replicate. Shouldn't have 50 steps.  Need to include a makefile or show video of how something is run.  Containerize! 
 - Makefile is super important. Learn how to create/run a makefile! 
-  - don't check in any code that we haven't developed.  e.g. swagger codegen.  
-  - we can ship code that doesn't require all the code.  
-- Hadoop...look at chameleon cloud's hadoop deployment.  
-- Containers. 
+- don't check in any code that we haven't developed.  e.g. swagger codegen.  
+- we can ship code that doesn't require all the code.  
 - Swagger service - we will use the swagger service in the project. 
+- Apache Kudu/Impala
+	- Note the different tones between academic papers and documentation.  
 
 
-Paper Topic: 
+Paper Topic 1
+
+Title: Processing Massive Datasets at Scale with Open Source Software: Apache Kudu and Cloudera Impala. 
+
+
+Kudu and Impala. 
+
+Sequel of SQL: RDBMS are making a comeback.  Briefly discuss the movement from SQL to NoSQL back to SQL. Many of the reasons that SQL became unpopular are no longer relevant, or the problems have been solved. 
+
+Driven by need to ingest, update, and analyze massive datasets at scale, give low-cost, open-source. Kudu is an open-source storage engine for structured data designed to provide low-latency random access to distributed data souces. 
+
+"Kudu stores most of its data in an internal columnar format.  Each column is stored, encoded, and compressed separately in small partitions.  Indices allow fast seeking by key or position and delta stores allow tracking of updated and deleted rows"
+
+Kudu uses the Raft consensus and horizontal partitioning of tables into tablets.  
+
+Kudu is written with APIs in Java, C++, and Python.    
+
+* What problem is this solving?  Structured stores in Hadoop ecosystem... Immutable databases - Apache Avro/Parquet don't have provisions for updating individual records. Mutable databases like Hbsae allow for low-latency record-level reads and writes, but lag behind the static file formats for sequential read-through for applications like SQL-based analytics and machine learning. 
+
+** Kudu fills the gap between immutability in static data stores and latency during sequential read-through in mutable databases. 
+
+* Definitions
+- Tablets.  Horizontally partitioned tables.
+
+* Advantages/Drawbacks of Kudu over NoSQL databases
+	-- Kudu vs. other softwares: 
+	-- Spanner
+	-- HDFS/Hive
+
+* Advantages/Drawbacks of Impala 
+
+Raft Consensus Method:
+Kudu employs the Raft consensus method to replicate Tablets. 
+Raft implements consensus by first electing a distinguished
+leader, then giving the leader complete responsibility for managing the replicated log. The leader accepts log entries from clients, replicates them on other servers, and tells servers when it is safe to apply log entries to their state machines. Having a leader simplifies the management of the replicated log. For example, the leader can
+decide where to place new entries in the log without consulting other servers, and data flows in a simple fashion from the leader to other servers. A leader can fail or become disconnected from the other servers, in which case a new leader is elected.  - page 3 in raft paper. Note, the concept of a leader/follower is different than a master/client relationship. 
+
+Kudu improves upon the Raft algorithm in two ways: First, by using an exponential back-off algorithm to avoid data packet collisions after a failed leader election. Essentially, the backoff algorithm works by randomly choosing increasing values for clients to send data until there is no longer a conflict.  
+
+Second, when a new leader contacts a client whose log diverges from its own, Raft proposes iteratively stepping backward until the point where the two logs diverge. Kudu proposes immediately jumping back to the last committedIndex, potentially saving many steps.  
+
+Fractured Mirrors, or "Decomposition Storage Model vertically partitions all attributes of a given relation"
+Example Applications in Depth. Abstract at https://dl.acm.org/citation.cfm?id=1287407
+
+Understanding Partitioning in Kudu is Necessary to Optimize
+The Kudu paper - page 4
+Replication in Kudu. Kudu replicates its table data across multiple machines. The user selects a replication factor (usually 3 or 5), and the Kudu master attempts to maintain the given number of replicas. (The Kudu paper, 3.4.2). 
+
+Tablet Storage Goals: 
+1. Fast Columnar scans
+2. Low-latency random updates
+3. Consistency of performance. 
+
+MemRowSet and DiskRowSet implementation. Design broadly based on MassTree **cite**
+
+MVCC = multi-version concurrency control.
+
+* Writability. 
+INSERT and ALTER TABLE operations are the primary advantage Kudu has over non-relational, or NoSQL databases like Hbase or Cassandra. The immutability of NoSQL databases provides significant performance advatages over traditional RDBMS, but at the expense of write capabilities. The converse is true for traditional relational databases.  Kudu fills this gap, offering lower latency benchmarked performance over relational databases such as MySQL, and writability-upon-ingestion not found in NoSQL databases. 
+
+
+"If a client wishes to write, it first locates the leader replica and sends a write request to that replica. If that replica is no longer the leader, the request will error out, the replica will refresh its metadata cache, and a new request will be resent to the new leader."  While this process may seem cumbersome or error prone, Kudu's robust scheduling manager is designed with fault-tolerance and performance in mind. Obviously recording the correct order of the entries is paramount, which Kudu accomplishes with a local lock manager.  "If a majority of the followers accept the write and log it to their own local write-ahead logs, the write it considered durably replicated"
+**the kudu paper page 4**
+
+* Decoupling of storage and distribution
+New hybrid columnar storage architecture. 
+
+** Summary regarding tablet storage: 
+"Kudu offers several improvements and design choices in read, write, distribution, and maintenance operations." "Caches all metadata for Replicated Tables in RAM for optimal performance." 
+**MemRowSet and DiskRowSet - MemRowSet is in-memory storage that frequently gets "rolled" to DiskRowSet. A detailed explanation of these processes is beyond the scope of this paper, but can be found **here** {the Kudu paper}. 
+
+** Schema Design: 
+Apache Kudu Schema Design. **Cite 7**
+Kudu takes advantage of strongly-typed columns. As such, users should specify column type vs. using a schema-less table as in a NoSQL database.  This provides the advantage of Kudu feeling and acting in many ways like a familiar Relational Database, while allowing for improved read-write performance over NoSQL databases. 
+
+** Column encoding: 
+Columns can be encoded depending on the type in one of five ways: plain, bitshuffle, run length, prefix, and dictionary. Plain encoding is data stored in its natural format, whereas bitshuffle 
+
+"Arranging a typed data array in to a matrix with the elements as the rows and the bits within the elements as the columns, Bitshuffle "transposes" the matrix, such that all the least-significant-bits are in a row, etc. This transposition is performed within blocks of data roughly 8kB long; this does not in itself compress data, but rearranges it for more efficient compression. A compression library is necessary to perform the actual compression." http://adsabs.harvard.edu/abs/2017ascl.soft12004M
+
+*Security: 
+Security and encryption are two concerns and something that Kudu team treats seriously. Kudu uses Hadoop security roles and permissions via Kerberos authentication. 
+
+As of the date of this writing.  Kudu also integrates with Apache Sentry, which provides role-based authentication methods.  "System-wide security is supported for Kudu API calls, but one can still use Apache Sentry with Impala to secure Kudu tables for the end users."  Kudu has been tested to support common encryption software, but this area may leave somewhat of a gap.  
+**http://boristyukin.com/benchmarking-apache-kudu-vs-apache-impala/**
+
+Integration: 
+Kudu is tightly integrated with Impala, but supports the entire Apache ecosystem including Spark.  
+
+Impala:
+* Impala primer {the Impala paper} Modern, Open-Source SQL engine for Hadoop environments. Low-latency, high concurrency for BI/analytic queries on HDFS.  
+
+* Primary Features: Cite 13
+** Impala provides familiar SQL-style query commands, including SELECT, INSERT, CREATE TABLE, ALTER TABLE, joins, and aggregate functions. 
+
+** HDFS and Hbase storage and codecs, including HDFS file formats Avro, Kudu, and Parquet and compression codes Snappy and GZIP among others.  
+
+** JDBC and ODBC interfaces
+
+** Command-line interface
+
+** Kerberos authentication. 
+
+* Benefits include no batch framework - Impala supports real-time, streaming analytics.  Impala shows that it is possible to build a low-latency interactive analytics platform on a batch-processing data framework. 
+
+* History. 
+
+* Performance Comparisons
+**Hive: Impala circumvents MapReduce and uses a distributed query engine to outperform Hive significantly.  
+
+* Architecture: 
+Impala is a MPP, or Massively Parallel Processing platform, capable of running on very medium to large Hadoop clusters with minimal additional setup.  An Impala instance is comprised of three services: an Impala daemon, a Statestore daemon, and a Catalog daemon.  Similar in concept to Kudu's leader-client model, the Impala daemon functions both as a query receiver from Impala's back-end, and as a coordinator or leader for a particular query. The Statestore and Catalog daemons handle metadata operations.  All three services are coordinated by Cloudera Manager, which is designed to manage an entire Hadoop deployment.  
+
+* Data formats
+
+Take-away, challenges. 
+
+* The focus here is on speed as the only metric.  The authors of Impala are able to demonstrate that the platform consistently outperforms proprietary databases, sometimes be a factor of 4.5x.  What is not measured is opportunity or switching cost. Many enterprises will not be ready to turn away from their current legacy systems, even when faced with the promise of significant performance increases.  
+
+Regarding the application of Kudu
+
+
+Future of Kudu 
+1) Offering different options for storage layouts. 
+
+Cite 1: "the Kudu paper"
+https://kudu.apache.org/kudu.pdf
+
+Cite 2: "the Impala paper"
+http://cidrdb.org/cidr2015/Papers/CIDR15_Paper28.pdf
+
+Cite 3: "Raft consensus algo"
+https://raft.github.io/raft.pdf
+
+Cite 4: Decomposition Storage Model
+https://dl.acm.org/citation.cfm?id=1287407
+
+Cite 5: Benchmarking Impala on Kudu vs. Parquet
+**http://boristyukin.com/benchmarking-apache-kudu-vs-apache-impala/**
+
+Cite 6: 
+Performance comparison of different file formats and storage engines in the Apache Hadoop ecosystem: 
+https://blog.cloudera.com/blog/2017/02/performance-comparing-of-different-file-formats-and-storage-engines-in-hadoop-file-system/
+
+Cite 7: 
+Kudu Schema Design
+https://kudu.apache.org/docs/schema_design.html
+
+Cite 8: 
+Encoding type definitions: 
+https://github.com/apache/parquet-format/blob/master/Encodings.md
+
+Cite 9: 
+Kudu and Impala - Kudu vs. Spanner
+https://kudu.apache.org/2017/10/23/nosql-kudu-spanner-slides.html
+
+Cite 10: Bitshuffle
+http://adsabs.harvard.edu/abs/2017ascl.soft12004M
+
+Cite 11: Consistency in Apache Kudu
+https://kudu.apache.org/2017/09/18/kudu-consistency-pt1.html
+
+Cite 12: A brave new world in mutable big data: Relational Storage
+https://kudu.apache.org/2017/10/23/nosql-kudu-spanner-slides.html
+
+Cite 13: Impala features: 
+https://www.cloudera.com/documentation/enterprise/5-3-x/topics/impala_intro.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Paper Topic 2: 
 Vagrant.  
-Vagrant is a command-line utility for managing virtual environments. Developed in 2009 by Mitchell Hashimoto and John Bender, Vagrant was originally designed to replace the 2010-era web development practices associated with largely static web environments.  With the advent of dynamic languages such as Python, Ruby, and other extensible frameworks, the need arose for portable and disposable development environments that could be rapidly created and just as quickly destroyed.  
+Vagrant is a command-line utility for quickly setting up virtual environments. Developed in 2009 by Mitchell Hashimoto and John Bender, Vagrant was originally designed to replace the 2010-era web development practices associated with largely static web environments. **Rethink this sentence - originally designed when this type of webpage was common**  With the advent of dynamic languages such as Python, Ruby, and other extensible frameworks, the need arose for portable and disposable development environments that could be rapidly provisioned and destroyed. 
 
 Mitchell Hashimoto and John Bender formed Hashicorp in 2010 to work on Vagrant full-time after starting the software as a side project in the late 2000's. Other projects include Vault, Serf, Packer, and **insert company information here**.  
 
-Vagrant builds on virtualized environments like VirtualBox and VMware. 
+Vagrant builds on virtualized environments like VirtualBox and VMware. By virutalizing on already existing software, THEY HAVE OVERCOME THIS PROBLEM.  Vagrant sets up Multi-VM networks by importing pre-configured images called "boxes".  Works with Puppet and Chef
 
-Built to combat "Works on my machine" . 
+Built to combat "Works on my machine".  
+
+Vagrant works with Docker, and is mainly meant for Ruby. 
 
 "Vagrant puts your development environment into a virtual machine".  Oreilly/Hashimoto
 
 John Bender. 
 
 License?  
+
+Source control for your images. The same concept is available in VirtualBox/VMWare, but a Vagrantfile is much lighter weight. 
 
 Commands https://www.linuxjournal.com/content/introducing-vagrant: 
 

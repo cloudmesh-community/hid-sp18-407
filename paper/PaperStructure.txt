@@ -1,0 +1,32 @@
+Title: 
+"Lightning" the Load: Kudu and Impala for Improved Distributed Analytics 
+
+Intro
+
+SQL vs. NoSQL. SQL is coming back. 
+
+Why Kudu and Impala together. 
+What is Kudu
+	- Description. 
+	- Origins. 
+	- License. 
+	- What problem is this software solving? 
+	- Terminology
+	- Technical bits. 
+		- Raft consensus method
+		- Horizontal partitioning
+		- MVCC - what it is, how does Kudu do it. 
+		- Leader/follower for synchronizing distributed tables
+		- Optimizing performance with Column encoding
+			- Optimize by type. Int vs. Binary vs. String encoding.  What is dictionary, plain, bitshuffle? 
+		- Optimizing performance via Compression
+		- Security
+	
+What is Impala
+	- 
+
+Examples/Use Cases
+- Comparisons/benchmarks
+Future of Kudu and Impala
+
+
