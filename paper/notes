@@ -10,40 +10,62 @@ Notes:
 	- Note the different tones between academic papers and documentation.  
 
 
-Paper Topic 1
 
 Title: Processing Massive Datasets at Scale with Open Source Software: Apache Kudu and Cloudera Impala. 
 
-Sequel of SQL: relational, columnar databases are making a comeback.  Briefly discuss the movement from SQL to NoSQL back to SQL. Many of the reasons that SQL became unpopular are no longer relevant, or the problems have been solved. 
+/Section - Why is Apache Kudu significant? 
+SQL was the dominiant language for working with data until the 2000's.  With the explosion in the volume and velocity of data, programmers struggled to scale SQL-based storage and query engines to meet demand; thus NoSQL was born. Relational Database Management Systems (RDBMS) platforms are being designed once again as processing power overcomes the hurdles for which NoSQL was originally designed. Many of the reasons that contributed to the decline of RDBMS became unpopular are no longer relevant, or the problems have been solved. Developers can now choose a programming paradigm depending on their specific needs without sacrificing performance or usability, and without having to create complex architectures.
 
-Driven by need to ingest, update, and analyze massive datasets at scale, given a low-cost, open-source framework, Kudu was started in 2014 is now a Top-Level Project within Apache.  Kudu is described as an open-source storage engine for structured data designed to provide low-latency random access to distributed data souces.  "At a high level, Kudu is a new storage manager that enables durable single-record inserts, updates, and deletes, as well as fast and efficient columnar scans due to its in-memory row format and on-disk columnar format."  Cite 14. Impala is a SQL engine providing low-latency, high-concurrency access for business intelligence-type analytic queries on HDFS.  Cite 13. 
+In 2015, Cloudera donated both Impala and Kudu projects to the Apache Software Foundation in hopes that a full-time developer community would spark the projects into stable, widely adopted platforms. 
+
+/Section - Intro
 
 Kudu and Impala together provide many advantages.  With Kudu, a user can access many data stores through a single query engine like Impala. With Impala, many sources of data can be queried from a single SQL interface, such as Hive, Hbase, or naturally Kudu. Kudu is tightly integrated with Impala, but supports the entire Apache ecosystem including Spark, Hive, Hbase, and others. Cite 14. Because both platforms are part of the Hadoop ecosystem, their capabilities are greatly expanded through interoperability with the data stores, cluster managers, and visualization tools. 
 
-Kudu and Impala benefit from several design choices aimed at bridging the gap between HDFS with limited ability to write, and NoSQL databases such as Hive that ingest real-time data but provide poor analytical performance.  Traditional data management stores in the Hadoop ecosystem such as HDFS represent immutable databases and are more suited to unstructured or semi-structured, streaming data but can be difficult to query. Conversely, traditional Apache analytical platforms such as Avro/Parquet excel at analytical queries, but don't have provisions for updating individual records. Mutable databases like Hbase allow for low-latency record-level reads and writes, but lag behind the static file formats for sequential read-through for applications like SQL-based analytics and machine learning.  Cite 14. 
-
-This architecture makes Kudu very attractive for data that arrives as a single record at a time or that may need to be modified at a later time. Today, many users try to solve this challenge via a Lambda architecture, which presents inherent challenges by requiring different code bases and storage for the necessary batch and real-time components. Using Kudu and Impala together completely avoids this problematic complexity by easily and immediately making data inserted into Kudu available for querying and analytics via Impala"
-
-Kudu fills the gap between immutability in static data stores and latency during sequential read-through in mutable databases, and offers several improvements and design choices in read, write, distribution, and maintenance operations."  Cite 1. 
+Kudu was started in 2014 and is now a Top-Level Project within Apache. Driven by need to ingest, update, and analyze massive datasets at scale, given a low-cost, open-source framework, Kudu is described as an open-source storage engine for structured data designed to provide low-latency random access to distributed data souces, particularly within the Hadoop ecosystem.  "At a high level, Kudu is a new storage manager that enables durable single-record inserts, updates, and deletes, as well as fast and efficient columnar scans due to its in-memory row format and on-disk columnar format."  Cite 14. One of the main advantages Kudu offers is a simple API for row-level writes, updates, upserts, and deletes, while maintaining query throughput speeds similar to binary stores such as Apache Avro. Cite 17. Impala is a SQL engine providing low-latency, high-concurrency access for business intelligence-type analytic queries on HDFS.  Cite 13. 
 
 
+/Section - Kudu
+
+Kudu benefits from several design choices aimed at bridging the gap between static and dynamic data stores. Static Hadoop data stores such as Apache Avro or Parquet have limited ability to write but low-latency interactivity. These "traditional" data management stores in represent immutable databases and are more suited to unstructured or semi-structured streaming data. Cite 1. Whereas semi or unstructured stores such as Hive can read and write real-time data but provide less-than-optimal analytical performance. Cite 2. Mutable databases like Hbase allow for low-latency record-level reads and writes, but lag behind the static file formats for sequential read-through for applications like SQL-based analytics and machine learning.  Cite 14. 
+
+"Kudu fills the gap between immutability in static data stores and latency during sequential read-through in mutable databases, and offers several improvements and design choices in read, write, distribution, and maintenance operations."  Cite 1. **INCLUDE PICTURE HERE**
+
+//caption: 
+
+
+**MOVE TO SEGUE WITH IMPALA?**
+This architecture makes Kudu very attractive for storing streaming data that may need to be modified at a later time, such as healthcare or weather data. Cite 7. "Today, many users try to solve this challenge via a Lambda architecture, which presents inherent challenges by requiring different code bases and storage for the necessary batch and real-time components." Cite 14. Kudu and Impala together circumvents the need for such complex architecures, as they are well-suited for real-time interactivity and are designed to be tightly integrated.  
+
+/Section - How does Kudu do this?
+
+Kudu utilizes a flexible array of horizontal partitioning schemes to achieve high-throughput storage and low-latency random access. Contrast other distributed data stores such as Hbase or Cassandra which use either key-range horizontal partitioning, or hash partition methods respectively. In Kudu, "the partition schema acts as a function which can map from a primary key tuple into a binary partition key.  Each tablet covers a contiguous  range  of  these partition  keys.   Thus,  a  client,  when performing a read or write, can easily determine which tablet should hold the given key and route the request accordingly."  
+
+/Section: Fault-tolerant distributed Data
+
+Kudu uses the Raft consensus and horizontal partitioning of tables into tablets. Different from Parquet, which uses vertical partitioning, providing performance advantages in partial queries and retrievals. 
+ 
+Raft implements consensus by first electing a distinguished leader, then giving the leader complete responsibility for managing the replicated log. The leader accepts log entries from clients, replicates them on other servers, and tells servers when it is safe to apply log entries to their state machines. Having a leader simplifies the management of the replicated log. For example, the leader can
+decide where to place new entries in the log without consulting other servers, and data flows in a simple fashion from the leader to other servers. A leader can fail or become disconnected from the other servers, in which case a new leader is elected.  - page 3 in raft paper. Note, the concept of a leader/follower is different than a master/client relationship. 
+
+Kudu stores most of its data in a familiar-to-RDBMS columnar format.  Each column is stored, encoded, and compressed separately in small partitions.  Indices allow fast seeking by key or position and delta stores allow tracking of updated and deleted rows.  Cite 1.  
+
+Because Kudu stores data in columnar format, it is not suited for unstructured data. 
+
+**MIGHT BE OUT OF SCOPE OF THE PAPER**
+Kudu storage on Disk: 
 "Caches all metadata for Replicated Tables in RAM for optimal performance." 
 **MemRowSet and DiskRowSet - MemRowSet is in-memory storage that frequently gets "rolled" to DiskRowSet. A detailed explanation of these processes is beyond the scope of this paper, but can be found **here** {the Kudu paper}. 
 
-
-stores most of its data in an internal columnar format.  Each column is stored, encoded, and compressed separately in small partitions.  Indices allow fast seeking by key or position and delta stores allow tracking of updated and deleted rows".  Because Kudu stores data in columnar format, it is not suited for unstructured data."  
-
-
-Kudu uses the Raft consensus and horizontal partitioning of tables into tablets. Different from Parquet, which uses vertical partitioning, providing performance advantages in partial queries and retrievals. 
-
-Kudu is written with APIs in Java, C++, and Python.    
-
-* What problem is this solving?  
-
-**  
+Kudu Integrations. 
+Kudu is written with APIs in Java, C++, and Python, and is designed on top of the Hadoop ecosystem. Accordingly, Kudu integrates with several key Hadoop components including MapReduce, Spark, and of course, Impala. 
 
 * Definitions
+- Horizontal Partitioning. 
 - Tablets.  Horizontally partitioned tables.
+- MemRowSet
+- DiskRowSet
+- 
 
 * Advantages/Drawbacks of Kudu over NoSQL databases (use graph image here). 
 	-- Kudu vs. other softwares: 
@@ -53,18 +75,17 @@ Kudu is written with APIs in Java, C++, and Python.
 * Advantages/Drawbacks of Impala: 
 
 Raft Consensus Method:
-Kudu employs the Raft consensus method to replicate Tablets. 
-Raft implements consensus by first electing a distinguished leader, then giving the leader complete responsibility for managing the replicated log. The leader accepts log entries from clients, replicates them on other servers, and tells servers when it is safe to apply log entries to their state machines. Having a leader simplifies the management of the replicated log. For example, the leader can
-decide where to place new entries in the log without consulting other servers, and data flows in a simple fashion from the leader to other servers. A leader can fail or become disconnected from the other servers, in which case a new leader is elected.  - page 3 in raft paper. Note, the concept of a leader/follower is different than a master/client relationship. 
 
-Kudu improves upon the Raft algorithm in two ways: First, by using an exponential back-off algorithm to avoid data packet collisions after a failed leader election. Essentially, the backoff algorithm works by randomly choosing increasing values for clients to send data until there is no longer a conflict.  
+
+Kudu improves upon the Raft algorithm in two ways: First, by using an exponential back-off algorithm to avoid data packet collisions after a failed leader election. Essentially, the backoff algorithm works by randomly choosing increasing time delay values for clients to send data until there is no longer a conflict.  
 
 Second, when a new leader contacts a client whose log diverges from its own, Raft proposes iteratively stepping backward until the point where the two logs diverge. Kudu proposes immediately jumping back to the last committedIndex, potentially saving many steps.  
 
 Fractured Mirrors, or "Decomposition Storage Model vertically partitions all attributes of a given relation"
 Example Applications in Depth. Abstract at https://dl.acm.org/citation.cfm?id=1287407
 
-Understanding Partitioning in Kudu is Necessary to Optimize
+Understanding Partitioning in Kudu is Necessary to Optimize Performance
+
 The Kudu paper - page 4. 
 Replication in Kudu. Kudu replicates its table data across multiple machines. The user selects a replication factor (usually 3 or 5), and the Kudu master attempts to maintain the given number of replicas. (The Kudu paper, 3.4.2). 
 
@@ -188,6 +209,14 @@ https://blog.cloudera.com/blog/2016/09/apache-kudu-and-apache-impala-incubating-
 Cite 15: 
 http://www.clouderaworldtokyo.com/session-download/B3-Kudu-2FImpala-Strata-talk.pdf
 
+Cite 16: Cloudera donates both Kudu and Impala to ASF:
+https://adtmag.com/articles/2015/11/18/cloudera-donates-projects.aspx
+
+Cite 17: Kudu Proposal 
+https://wiki.apache.org/incubator/KuduProposal
+
+Cite 18: Impala Proposal
+https://wiki.apache.org/incubator/ImpalaProposal
 
 
 

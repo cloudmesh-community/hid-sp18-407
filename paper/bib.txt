@@ -1,0 +1,52 @@
+Cite 1: "the Kudu paper"
+https://kudu.apache.org/kudu.pdf
+
+Cite 2: "the Impala paper"
+http://cidrdb.org/cidr2015/Papers/CIDR15_Paper28.pdf
+
+Cite 3: "Raft consensus algo"
+https://raft.github.io/raft.pdf
+
+Cite 4: Decomposition Storage Model
+https://dl.acm.org/citation.cfm?id=1287407
+
+Cite 5: Benchmarking Impala on Kudu vs. Parquet
+**http://boristyukin.com/benchmarking-apache-kudu-vs-apache-impala/**
+
+Cite 6: 
+Performance comparison of different file formats and storage engines in the Apache Hadoop ecosystem: 
+https://blog.cloudera.com/blog/2017/02/performance-comparing-of-different-file-formats-and-storage-engines-in-hadoop-file-system/
+
+Cite 7: 
+Kudu Schema Design
+https://kudu.apache.org/docs/schema_design.html
+
+Cite 8: 
+Encoding type definitions: 
+https://github.com/apache/parquet-format/blob/master/Encodings.md
+
+Cite 9: 
+Kudu and Impala - Kudu vs. Spanner
+https://kudu.apache.org/2017/10/23/nosql-kudu-spanner-slides.html
+
+Cite 10: Bitshuffle
+http://adsabs.harvard.edu/abs/2017ascl.soft12004M
+
+Cite 11: Consistency in Apache Kudu
+https://kudu.apache.org/2017/09/18/kudu-consistency-pt1.html
+
+Cite 12: A brave new world in mutable big data: Relational Storage
+https://kudu.apache.org/2017/10/23/nosql-kudu-spanner-slides.html
+
+Cite 13: Impala features: 
+https://www.cloudera.com/documentation/enterprise/5-3-x/topics/impala_intro.html
+
+Cite 14:  Kudu and Impala Primer: 
+https://blog.cloudera.com/blog/2016/09/apache-kudu-and-apache-impala-incubating-the-integration-roadmap/
+
+Cite 15: 
+http://www.clouderaworldtokyo.com/session-download/B3-Kudu-2FImpala-Strata-talk.pdf
+
+Cite 16: Apache Avro
+https://avro.apache.org/
+
