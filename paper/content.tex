@@ -52,17 +52,8 @@ SQL was the dominiant language for working with data until the
 mid-2000's.  With the explosion in the volume and velocity of
 available data, programmers struggled to scale SQL-based storage and
 query engines to meet demand; thus NoSQL was born. Now, Relational
- Database Management Systems (RDBMS) platforms are being designed once 
-again as processing power overcomes the hurdles for which NoSQL was 
-originally designed. Many of the reasons that contributed to the 
-decline of RDBMS became unpopular and are no longer relevant, or the 
-problems have been solved. Developers can now choose a programming 
-paradigm depending on their specific needs without sacrificing 
-performance or usability, and without having to create complex 
-architectures.  Kudu represents one option in this domain. In 2015, 
-Cloudera donated both Impala and Kudu projects to the Apache Software 
-Foundation in hopes that a full-time developer community would spark 
-the projects into stable, widely adopted platforms. 
+Database Management Systems (RDBMS) platforms are being designed once
+again as processing power overcomes the hurdles for which NoSQL was originally designed. Many of the reasons that contributed to the decline of RDBMS became unpopular and are no longer relevant, or the problems have been solved. Developers can now choose a programming paradigm depending on their specific needs without sacrificing performance or usability, and without having to create complex architectures.  Kudu represents one option in this domain. In 2015, Cloudera donated both Impala and Kudu projects to the Apache Software Foundation in hopes that a full-time developer community would spark the projects into stable, widely adopted platforms. 
 
 \section{Kudu and Impala}
 Kudu was started in 2014 and is now a Top-Level Project within Apache. Driven by need to ingest, update, and analyze massive datasets at scale, given a low-cost, open-source framework, Kudu is described as an open-source storage engine for structured data designed to provide low-latency random access to distributed data sources, particularly within the Hadoop ecosystem. Cite 17. ``At a high level, Kudu is a new storage manager that enables durable single-record inserts, updates, and deletes, as well as fast and efficient columnar scans due to its in-memory row format and on-disk columnar format.''  Cite 14. One of the main advantages Kudu offers is a simple API for row-level writes, updates, upserts, and deletes, while maintaining query throughput speeds similar to binary stores such as Apache Avro. Cite 1. Impala is a SQL engine providing low-latency, high-concurrency access for business intelligence-type analytic queries on HDFS.  Cite 2. 
