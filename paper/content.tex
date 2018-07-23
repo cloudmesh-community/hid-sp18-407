@@ -35,7 +35,7 @@
 
 
 \begin{abstract}
-This paper examines the benefits of using Apache Kudu and Apache Impala. Apache Kudu is an open-source storage engine for structured streaming data that provides record-level update capabilities.  Apache Impala is a high-performance SQL query engine tightly integrated with Kudu among other data storage platforms.  Kudu and Impala together provide many advantages over traditional Hadoop storage and query systems.  
+This paper examines the benefits of  Apache Kudu using Apache Impala as an illustration. Apache Kudu is an open-source storage engine for structured streaming data that provides record-level update capabilities.  Apache Impala is a high-performance SQL query engine tightly integrated with Kudu among other data storage platforms.  Kudu and Impala together provide many advantages over traditional Hadoop storage and query systems.  
 \end{abstract}
 
 \keywords{\locator\ apache, kudu, impala, SQL, analytics}
@@ -44,13 +44,10 @@ This paper examines the benefits of using Apache Kudu and Apache Impala. Apache 
 
 
 \section{Introduction}
-The evolution of cloud computing technologies changes at an ever-increase pace. Applications of these technologies vary greatly but have one thing in common: the need to ingest, store, process, manipulate, and extract data to make decisions with. The volume of these available data has increased just as quickly, as organizations increasingly view data as a commodity.  One effect of this trend is the shift of focus away from some well-established technologies toward new methods aimed at scalable processing power. 
+The evolution of cloud computing technologies changes at an ever-increase pace. Applications of these technologies vary greatly but have one thing in common: the need to ingest, store, process, manipulate, and extract data to make decisions with. The volume of these available data has increased just as quickly, as organizations increasingly view data as a commodity.  One effect of this trend is the shift of focus away from some well-established technologies toward new methods aimed at scalable processing power.~\cite{hid-sp18-kudu-intro}
 
 \paragraph{Background}
-SQL was the dominiant language for working with data until the
-mid-2000's.  With the explosion in the volume and velocity of
-available data, programmers struggled to scale SQL-based storage and
-query engines to meet demand; thus NoSQL was born. Now, Relational
+SQL was the dominiant language for working with data until the mid-2000's.  With the explosion in the volume and velocity of available data, programmers struggled to scale SQL-based storage and query engines to meet demand; thus NoSQL was born. Now, Relational
 Database Management Systems (RDBMS) platforms are being designed once
 again as processing power overcomes the hurdles for which NoSQL was originally designed. Many of the reasons that contributed to the decline of RDBMS became unpopular and are no longer relevant, or the problems have been solved. Developers can now choose a programming paradigm depending on their specific needs without sacrificing performance or usability, and without having to create complex architectures.  Kudu represents one option in this domain. In 2015, Cloudera donated both Impala and Kudu projects to the Apache Software Foundation in hopes that a full-time developer community would spark the projects into stable, widely adopted platforms. 
 
@@ -64,75 +61,35 @@ Kudu and Impala together provide many advantages.  With Kudu, a user can access 
 \section{Kudu}
 Kudu benefits from several design choices aimed at bridging the gap between static and dynamic data stores. Static Hadoop data stores such as Apache Avro or Parquet have limited ability to write but low-latency interactivity. These ``traditional'' data management stores in represent immutable databases and are more suited to unstructured or semi-structured streaming data. Cite 1. Whereas semi or unstructured stores such as Hive can read and write real-time data but provide less-than-optimal analytical performance. Cite 2. Mutable databases like Hbase allow for low-latency record-level reads and writes, but lag behind the static file formats for sequential read-through for applications like SQL-based analytics and machine learning.  Cite 14. ``Kudu fills the gap between immutability in static data stores and latency during sequential read-through in mutable databases, and offers several improvements and design choices in read, write, distribution, and maintenance operations.''  Cite 1.
 
-\paragraph{Kudu vs. Lambda}
+\paragraph{Kudu vs. Lambda Architecture}
 This architecture makes Kudu very attractive for storing streaming data that may need to be modified at a later time, such as healthcare or weather data. Cite 7. ``Today, many users try to solve this challenge via a Lambda architecture, which presents inherent challenges by requiring different code bases and storage for the necessary batch and real-time components.'' Cite 14. Kudu and Impala together circumvents the need for such complex architecures, as they are well-suited for real-time interactivity and are designed to be tightly integrated.  
 
 \section{Flexible Horizontal Partionioning Schemes}
-Kudu utilizes a flexible array of horizontal partitioning schemes to achieve high-throughput storage and low-latency random access. Cite 1. Contrast other distributed data stores such as Hbase or Cassandra which use either key-range horizontal partitioning, or hash partition methods respectively. In Kudu, "the partition schema acts as a function which can map from a primary key tuple into a binary partition key.  Each tablet covers a contiguous  range  of  these partition keys. Thus,  a client, when performing a read or write, can easily determine which tablet should hold the given key and route the request accordingly." Cite 1. By optimizing the scanning features and compression codecs, Kudu reduces the amount of time needed to return row-level data. Additionally, the flexibility of choosing the appropriate partitioning scheme makes Kudu an viable option for high-throughput scenarios. 
+Kudu utilizes a flexible array of horizontal partitioning schemes to achieve high-throughput storage and low-latency random access. Cite 1. Contrast other distributed data stores such as Hbase or Cassandra which use either key-range horizontal partitioning, or hash partition methods respectively. In Kudu, "the partition schema acts as a function which can map from a primary key tuple into a binary partition key.  Each tablet covers a contiguous  range  of  these partition keys. Thus,  a client, when performing a read or write, can easily determine which tablet should hold the given key and route the request accordingly." Cite 1. By optimizing the scanning features and compression codecs, Kudu reduces the amount of time needed to return row-level data. Additionally, the flexibility of choosing the appropriate partitioning scheme makes Kudu an viable option for high-throughput scenarios.
+
+\begin{enumerate}
+Tablet Storage Goals: 
+1. Fast Columnar scans
+2. Low-latency random updates
+3. Consistency of performance.
+\end{enumerate}
 
 \paragraph{Raft}
-Kudu uses the Raft consensus and horizontal partitioning of tables into ``tablets'' or the subset of a partitioned table. Conversely, Parquet, a static binary data store, uses vertical partitioning, which can provide performance advantages in partial queries and retrievals. 
+Kudu uses the Raft consensus method and horizontal partitioning of tables into ``tablets'' or the subset of a partitioned table. Conversely, Parquet, a static binary data store, uses vertical partitioning, which can provide performance advantages in partial queries and retrievals. 
 
 Raft implements consensus by first electing a distinguished leader, then giving the leader complete responsibility for managing the replicated log. The leader accepts log entries from clients, replicates them on other servers, and tells servers when it is safe to apply log entries to their state machines. Having a leader simplifies the management of the replicated log. For example, the leader can decide where to place new entries in the log without consulting other servers, and data flows in a simple fashion from the leader to other servers. A leader can fail or become disconnected from the other servers, in which case a new leader is elected.  Cite 3. Note, the concept of a leader/follower is different than a master/client relationship often found in 
 
-This sample has some advanced features that may not be offered by
-other \LaTeX\ frameworks. All of these features are accessible at this
-time throug a makefile. These advanced features are optional and
-introduce a number of automated tests for the document. Such tests are
-executed through a Makefile. Such makefiles can be executed on Linux
-or OSX. They are not available on sharelatex. As we have taught you
-how to set up a Linux system in class it is part of the leraning
-experience that you use that to verify the correctness of your
-paper. Alternatively you can set up a docker container and use
-that. It will be your responsibility to create such a container or set
-up the Linux environment with a \textit{full} version of \LaTeX\ and biber
-installed.
+Kudu improves upon the Raft algorithm in two ways: first by using an exponential back-off algorithm to avoid data packet collisions after a failed leader election. Essentially, the backoff algorithm works by randomly choosing increasing time delay values for clients to send data until there is no longer a conflict. Second, ``when a new leader contacts a client whose log diverges from its own, Raft proposes iteratively stepping backward until the point where the two logs diverge. Kudu proposes immediately jumping back to the last committedIndex, potentially saving many steps.'' ~\cite{hid-sp18-407-kudu-intro}
 
-The document is organized in a a repository, that needs to be
-replicated into your github repository. {\bf Please make sure that all
-  filenames and directory names but a README.md are all lower case and
-  have no underscore in it. Please make sure they do not contain a
-  space in the filename.} We repeat again: Be mindful about the
-capitalization of filenames and directory names. We only use lower
-case for any file in our directory and we never use spaces or non ASCI
-characters. 
+\paragraph{Mutability} 
+INSERT and ALTER TABLE operations are the primary advantage Kudu has over non-relational, or NoSQL databases like Hbase or Cassandra. The immutability of NoSQL databases provides significant performance advatages over traditional RDBMS, but at the expense of write capabilities. The converse is true for traditional relational databases.  Kudu fills this gap, offering lower latency benchmarked performance over relational databases such as MySQL, and writability-upon-ingestion not found in NoSQL databases. 
 
-IN order for you to most easily compile the paper you will also need
-to check out the directory hid-sample that includes the formats. 
+``If a client wishes to write, it first locates the leader replica and sends a write request to that replica. If that replica is no longer the leader, the request will error out, the replica will refresh its metadata cache, and a new request will be resent to the new leader.'' ~\cite{hid-sp18-407-kudu-intro}
 
-Your recommended directories should look like
-
-\begin{verbatim}
-~/github/cloudmesh-community/hid-samle
-~/github/cloudmesh-community/hid-sp18-000
-\end{verbatim}
-
-where 000 the number part of your hid. The two hid directories are
-cloned from github. We taught you how to do this and it is a class
-goal that you know how to do it. 
-
-In your hid folder you will find, once it is set up the following
-directory and files:
+While this process may seem cumbersome or error-prone, Kudu's robust scheduling manager is designed with fault-tolerance and performance in mind. Obviously recording the correct order of the entries is paramount, which Kudu accomplishes with a local lock manager.  ``If a majority of the followers accept the write and log it to their own local write-ahead logs, the write it considered durably replicated.'' ~\cite{hid-sp18-407-kudu-intro}
 
 
-We have the following files that you will modify:
 
-\begin{verbatim}
-paper/content.tex
-paper/report.tex
-paper/report.bib
-images/README.md
-\end{verbatim}
-
-We separated the content from the report format into two different
-files, as we found that students in the past manipulated our format to
-circumvent our page limitation and artificially increased spacing and
-other unnecessary things that we would consider as cheating.
-If you
-
-Thus the only file you are allowed to modify is the content.tex file
-and the report.bib bibliography file and the images directory in which
-you place your images.
 
 Within the text, images and tables are {\bf must} be placed in floats
 as discussed in the handbook. You can place them with \verb|[htb]| at
@@ -143,12 +100,6 @@ programs that are also to be placed in figures do not count towards
 the paper length. Please also be reminded this is not a presentation
 and that lengthy enumerations will lead to point deductions. IN case
 of questions, consult with the TAs.
-
-\section{Introduction}
-
-Put here an introduction about your topic. 
-We just need one sample reference so the paper compiles in \LaTeX\ so we
-put it here~\cite{editor00}.
 
 \section{Figures}
 
@@ -189,63 +140,6 @@ plagiarize the image. Find out from the hand book how to do that. Any
 plagiarism of images will result that we return the paper without
 review as you have not understood how plagiarism works.
 
-\section{Tables}
-
-In case you need to create tables, you can do this with online tools
-(if you do not mind sharing your data) such as
-\url{https://www.tablesgenerator.com/} or other such tools (please
-google for them). They even allow you to manage tables as CSV.
-
-or generate them by hand while using the provided template in Table
-\ref{t:mytable}. Note that
-the caption is before the tabular environment.
-
-\begin{table}[htb]
-\centering
-\caption{My caption}
-\label{t:mytabble}
-\begin{tabular}{lll}
-1 & 2 & 3 \\
-\toprule
-4 & 5 & 6 \\
-7 & 8 & 9
-\end{tabular}
-\end{table}
-
-\section{Quotes}
-
-Do not use double quotes 
-
-\begin{verbatim}
-"this is a wrong example"~\cite{las2018paper} 
-\end{verbatim}
-
-but use \LaTeX\ quotes
-
-\begin{verbatim}
-``This is a right example''~\cite{las2018paper}
-\end{verbatim}
-
-
-Quotes {\bf MUST} not be used to highlight works. Quotes are {\bf
-  STRICTLY} used for quoting text from sources with citation
-following. If we find a quote that is not followed by a citation we
-will return the paper without review. Please note that the two single
-quotes at the begining are not the same direction as the single quotes
-at the end. On the US keyboard the beginning quotes are next to the
-keyborad key 1 and the end quotes are next to the ENTER or RETURN
-key. We use them to identify how much you have quoted. If you have
-quoted more than 30\% we will not review your work. Most conferences
-and journals do not allow quoting above 20\%, so consider yourself
-lucky to have such a relaxed standard
-
-\section{Emphasize}
-
-To emphasize a text you do not use double or single quotes you use
-\emph{emph}.
-
-See the Handbook for more details.
-
 
 \section{Labels}
 
@@ -253,24 +147,6 @@ Do not use actual numbers in the taxt after you write for example
 Figure 1 use the ref for the figure while using its label. In our
 example it is Figure~\ref{f:fly} and Table Figure~\ref{t:mytabble}.
 See the source for the example.
-
-\section{Footnotes}
-
-Footnotes must be avoided in papers. All URLs must be included as full
-references and citations and used with the \verb|\cite| command
-\footnote{do not use footnotes}. You {\bf must} not use urls in the
-text or paper.
-
-\section{Plagiarism}
-
-The class includes a section about plagiarism which you must adhere
-to. Copying text without proper citation is considered cheating and we
-will assign the grade ``F'' for the paper if we find you do it. It is
-in your responsibility to make sure plagiarism does not occur. Please
-be aware that our checks are better than the once provided by turnitin
-or other online checkers. Excuses such as ``I did not have time'' or
-``I forgot'' can not apply as you have enough time to prepare the
-paper and must not forget. 
 
 \section{Check}
 
@@ -344,22 +220,14 @@ make clean
 \end{verbatim}
 
 
-
-{\bf UNDER NO CIRCUMSTANCES ARE YOU ALLOWED TO CHECK IN YOUR PDF OR
-  TEMPORARY LATEX FILES INTO GITHUB. GIT NEEDS TO STAY CLEAN AND ONLY
-  CONTAIN THE SOURCES.}
-
-We will deduct points if you do violate this.
-
 \section{Conclusion}
 
-Put here an conclusion. Conclusion and abstracts must not have any
-citations in the section.
+In sum, Kudu presents a modern, efficient distributed data store that bridges an existing gap between static, real-time access data stores and mutable, high-latent data stores. Given the compatibility with next-generation hardware such as solid-state drives, Kudu has the potential to become an increasingly useful solution and drive the re-emergence of relational database management systems. 
 
 
 \begin{acks}
 
-  The authors would like to thank Dr.~Gregor~von~Laszewski for his
+  The author would like to thank Dr.~Gregor~von~Laszewski for his
   support and suggestions to write this paper.
 
 \end{acks}
