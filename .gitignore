@@ -156,6 +156,7 @@ target/
 *.njsproj
 *.sln
 
+paper/bib.txt
 paper/report.pdf
 paper-instructions.md
 paper-instructions.pdf
