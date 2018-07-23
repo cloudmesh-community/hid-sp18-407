@@ -193,9 +193,7 @@ advatages over traditional RDBMS, but at the expense of write
 capabilities. The converse is true for traditional relational
 databases.  Kudu fills this gap, offering lower latency benchmarked
 performance over relational databases such as MySQL, and
-writability-upon-ingestion not found in NoSQL databases. 
-
-``If a client wishes to write, it first locates the leader replica
+writability-upon-ingestion not found in NoSQL databases. ``If a client wishes to write, it first locates the leader replica
 and sends a write request to that replica. If that replica is no
 longer the leader, the request will error out, the replica will
 refresh its metadata cache, and a new request will be resent to the
@@ -207,6 +205,18 @@ in mind. Obviously recording the correct order of the entries is
 paramount, which Kudu accomplishes with a local lock manager.  ``If a
 majority of the followers accept the write and log it to their own
 local write-ahead logs, the write it considered durably replicated.'' ~\cite{hid-sp18-407-kudu-intro}
+
+\paragraph{Schema Design} 
+Kudu takes advantage of strongly-typed columns. As such, users must specify column type vs. using a schema-less table as in a NoSQL database.  This provides the advantage of Kudu feeling and acting in many ways like a familiar Relational Database, while allowing for improved read-write performance over NoSQL databases. ~\cite{hid-sp18-407-kudu-schema-design}
+
+\section{Encoding} 
+Columns can be encoded depending on the type in one of five ways: plain, bitshuffle, run length, prefix, and dictionary. Plain encoding is data stored in its natural format, whereas bitshuffle arranges a data array into a matrix and then transposes that matrix, keeping only the most significant bits. ~\cite{hid-sp18-407-bitshuffle}
+
+\section{Security} 
+Security and encryption are two concerns and something that Kudu team treats seriously. Kudu uses Hadoop security roles and permissions via Kerberos authentication. As of the date of this writing, Kudu also integrates with Apache Sentry, which provides role-based authentication methods.  ``System-wide security is supported for Kudu API calls, but one can still use Apache Sentry with Impala to secure Kudu tables for the end users.'' ~\cite{hid-sp18-407-benchmarking-kudu} Kudu has been tested to support common encryption software, but this area may leave somewhat of a gap. 
+
+
+
 
 
 
