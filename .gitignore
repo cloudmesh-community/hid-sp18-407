@@ -156,6 +156,7 @@ target/
 *.njsproj
 *.sln
 
+paper/notes.txt
 paper/bib.txt
 paper/report.pdf
 paper-instructions.md
@@ -165,4 +166,5 @@ project-paper/images
 tutorial/incomplete-killrweather.md     
 tutorial/incomplete-spark.md
 tutorial/incomplete-mongo-windows10.md
+
 
