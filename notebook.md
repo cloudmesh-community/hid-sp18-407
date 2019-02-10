@@ -32,6 +32,7 @@ No activity between 3/5 and 6/1 due to incomplete
 * 2018/03/07 followed issue - "unresolvable json pointer" (ref: github workarounds)
 * 2018/03/07 killrweather app from databricks compile
 * 2018/06/15 reinitialized local repository in git, pushed changes to remote. 
+* 2019/02/08 emacs tutorial
 
 # Writing
 * 2018/03/01 start research
@@ -39,3 +40,4 @@ No activity between 3/5 and 6/1 due to incomplete
 * 2018/03/07 research spark - rdd
 * 2018/03/08 research spark MlLib, spark streaming, RDD abstraction
 * 2018/06/15 aim is to set a NLP application on a spark cluster using Raspberry pis. 
+* 2019/02/08 julia paper
