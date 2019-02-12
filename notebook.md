@@ -21,6 +21,7 @@ No activity between 3/5 and 6/1 due to incomplete
 * 2018/02/03 Read mongodb documentation and tutorials 
 * 2018/02/12 Read Spark handbook/tutorial
 * 2018/02/14 researched articles explaining RESTful API development and use case
+* 2019/02/08 julia reearch/reading
 
 # Practice
 * 2018/01/25 Downloaded Virtual box and installed linux ubuntu vm on Windows laptop
@@ -41,3 +42,4 @@ No activity between 3/5 and 6/1 due to incomplete
 * 2018/03/08 research spark MlLib, spark streaming, RDD abstraction
 * 2018/06/15 aim is to set a NLP application on a spark cluster using Raspberry pis. 
 * 2019/02/08 julia paper
+* 2019/02/09 julia paper
