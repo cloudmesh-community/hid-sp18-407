@@ -5,8 +5,9 @@
 * 2018/02/04 attended office hours w/Tyler and Prof. vL
 * 2018/03/04 attended office hours w/Tyler
 * 2018/03/05 attended office hours w/Prof
+* 2019/02/08 watched online meeting recordings. 
 
-No activity between 3/5 and 6/1 due to incomplete
+No activity between 3/5 and 6/1/2018 due to incomplete
 
 # Logistics
 * 2018/01/13 Read the entire class overview section
@@ -14,7 +15,7 @@ No activity between 3/5 and 6/1 due to incomplete
 * 2018/01/25 Installed python venv 3.6 on vm
 * 2018/02/03 Established github/chameleon/futuresystems profiles
 * 2018/02/04 reimaged personal laptop w/Ubuntu 16.04
-* 2018/02/08 installed Standalone spark on personal laptop (Ubuntu 16.04)  
+* 2018/02/08 installed Standalone spark on personal laptop (Ubuntu 16.04)
 
 # Theory
 * 2018/01/22 Watched video - creating a REST service
@@ -22,6 +23,7 @@ No activity between 3/5 and 6/1 due to incomplete
 * 2018/02/12 Read Spark handbook/tutorial
 * 2018/02/14 researched articles explaining RESTful API development and use case
 * 2019/02/08 julia reearch/reading
+* 2019/02/09 julia documentation
 
 # Practice
 * 2018/01/25 Downloaded Virtual box and installed linux ubuntu vm on Windows laptop
@@ -41,5 +43,6 @@ No activity between 3/5 and 6/1 due to incomplete
 * 2018/03/07 research spark - rdd
 * 2018/03/08 research spark MlLib, spark streaming, RDD abstraction
 * 2018/06/15 aim is to set a NLP application on a spark cluster using Raspberry pis. 
-* 2019/02/08 julia paper
-* 2019/02/09 julia paper
+* 2019/02/08 julia section
+* 2019/02/09 julia section
+* 2019/02/13 julia section
