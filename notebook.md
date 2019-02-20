@@ -1,3 +1,5 @@
+Incomplete for sp-18
+
 # Meetings
 
 * 2018/01/13 Attended online meeting
@@ -5,9 +7,8 @@
 * 2018/02/04 attended office hours w/Tyler and Prof. vL
 * 2018/03/04 attended office hours w/Tyler
 * 2018/03/05 attended office hours w/Prof
-* 2019/02/08 watched online meeting recordings. 
+* 2019/02/08 watched online meeting recordings.
 
-No activity between 3/5 and 6/1/2018 due to incomplete
 
 # Logistics
 * 2018/01/13 Read the entire class overview section
@@ -16,13 +17,14 @@ No activity between 3/5 and 6/1/2018 due to incomplete
 * 2018/02/03 Established github/chameleon/futuresystems profiles
 * 2018/02/04 reimaged personal laptop w/Ubuntu 16.04
 * 2018/02/08 installed Standalone spark on personal laptop (Ubuntu 16.04)
+* 2019/02/18 installed Julia
 
 # Theory
 * 2018/01/22 Watched video - creating a REST service
 * 2018/02/03 Read mongodb documentation and tutorials 
 * 2018/02/12 Read Spark handbook/tutorial
 * 2018/02/14 researched articles explaining RESTful API development and use case
-* 2019/02/08 julia reearch/reading
+* 2019/02/08 julia research/reading
 * 2019/02/09 julia documentation
 
 # Practice
@@ -36,6 +38,7 @@ No activity between 3/5 and 6/1/2018 due to incomplete
 * 2018/03/07 killrweather app from databricks compile
 * 2018/06/15 reinitialized local repository in git, pushed changes to remote. 
 * 2019/02/08 emacs tutorial
+* 2019/02/19 julia parallelism
 
 # Writing
 * 2018/03/01 start research
@@ -46,3 +49,5 @@ No activity between 3/5 and 6/1/2018 due to incomplete
 * 2019/02/08 julia section
 * 2019/02/09 julia section
 * 2019/02/13 julia section
+* 2019/02/18 julia section
+
