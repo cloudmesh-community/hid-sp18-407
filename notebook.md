@@ -8,6 +8,7 @@ Incomplete for sp-18
 * 2018/03/04 attended office hours w/Tyler
 * 2018/03/05 attended office hours w/Prof
 * 2019/02/08 watched online meeting recordings.
+* 2019/02/19 watched online meeting recordings
 
 
 # Logistics
@@ -17,7 +18,9 @@ Incomplete for sp-18
 * 2018/02/03 Established github/chameleon/futuresystems profiles
 * 2018/02/04 reimaged personal laptop w/Ubuntu 16.04
 * 2018/02/08 installed Standalone spark on personal laptop (Ubuntu 16.04)
-* 2019/02/18 installed Julia
+* 2019/02/13 installed Julia
+* 2019/02/14 read Scientific Writing e-book to understand citations in markdown
+* 2019/02/18 reactivated/logged into chameleoncloud.org account
 
 # Theory
 * 2018/01/22 Watched video - creating a REST service
@@ -26,6 +29,10 @@ Incomplete for sp-18
 * 2018/02/14 researched articles explaining RESTful API development and use case
 * 2019/02/08 julia research/reading
 * 2019/02/09 julia documentation
+* 2019/02/11 Julia documentation/research
+* 2019/02/12 AWS/Azure research
+* 2019/02/13 OpenStack research
+* 2019/02/15 OpenStack/Julia readings
 
 # Practice
 * 2018/01/25 Downloaded Virtual box and installed linux ubuntu vm on Windows laptop
@@ -46,8 +53,12 @@ Incomplete for sp-18
 * 2018/03/07 research spark - rdd
 * 2018/03/08 research spark MlLib, spark streaming, RDD abstraction
 * 2018/06/15 aim is to set a NLP application on a spark cluster using Raspberry pis. 
-* 2019/02/08 julia section
-* 2019/02/09 julia section
-* 2019/02/13 julia section
-* 2019/02/18 julia section
+* 2019/02/08 julia chapter
+* 2019/02/09 julia chapter
+* 2019/02/13 julia chapter
+* 2019/02/18 julia chapter
+* 2019/02/20 Julia chapter
+* 2019/02/21 Julia chapter
+* 2019/02/22 Julia chapter
+
 
