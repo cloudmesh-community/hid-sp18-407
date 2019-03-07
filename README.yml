@@ -9,4 +9,9 @@ owner:
   lastname: "Hickman"
   hid: "hid-sp18-407"
   community: "E516"
-
+chapter: julia
+  title: julia
+  keyword: julia
+  url: https://github.com/cloudmesh-community/book/tree/master/chapters/prg/julia/julia-language.md
+  github: https://github.com/keithhickman08/book
+project: Virtualization on Azure with Julia 
