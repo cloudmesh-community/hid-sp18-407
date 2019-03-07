@@ -10,6 +10,37 @@
 period and end with a period. However citations must be enclosed
 within the sentence. This is the same as in other academic fields.
 
+:o: CONVERT THIS TO MD:
+
+```
+\def\paperchapter{Apache Kudu} % This section is typically a single keyword. from
+                   % a small list. Consult with theinstructors about
+                   % yours. They typically fill it out once your first
+                   % text has been reviewed.
+\def\hid{hid-sp18-407} % all hids of the authors of this
+                                % paper. The paper must only be in one
+                                % authors directory and all other
+                                % authors contribute to it in that
+                                % directory. That authors hid must be
+                                % listed first
+\def\volume{9} % the volume of the proceedings in which this paper is to
+           % be included
+
+\def\locator{\hid, Volume: \volume, Chapter: \paperchapter, Status: \paperstatus. \newline}
+
+\title{Processing Massive Datasets: Apache Kudu and Cloudera Impala}
+
+\author{Keith Hickman}
+\affiliation{%
+  \institution{Indiana University School of Informatics and Computing}
+  \streetaddress{919 E 10th St}
+  \city{Bloomington} 
+  \state{Indiana} 
+  \postcode{47408}
+}
+\email{keonhick@iu.edu}
+```
+
 ## Introduction
 
 The evolution of cloud computing technologies changes at an
