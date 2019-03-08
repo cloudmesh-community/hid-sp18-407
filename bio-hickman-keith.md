@@ -1,4 +1,4 @@
-\subsection{Hickman, Keith}
+# Hickman, Keith
 
 Keith Hickman is a first-year Masters of Data Science student at Indiana University-Bloomington. He earned a dual bachelor's degree in Government and Criminal Justice from New Mexico State University, and a J.D. from Penn State. He currently works as an Analytics Manager for a manufacturing and distribution company in Indianapolis and is working on predictive supply chain analytics. 
 
