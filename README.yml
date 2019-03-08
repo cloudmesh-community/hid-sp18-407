@@ -14,4 +14,7 @@ chapter: julia
   keyword: julia
   url: https://github.com/cloudmesh-community/book/tree/master/chapters/prg/julia/julia-language.md
   github: https://github.com/keithhickman08/book
-project: Virtualization on Azure with Julia 
+project: Virtualization on Azure with Julia
+assignments: 
+  docopts: <https://github.com/cloudmesh-community/hid-sp18-407/blob/master/project-code/app.py>
+  
