@@ -16,11 +16,10 @@ Options:
 
 """
 from docopt import docopt
-
 ec2 = boto3.client('ec2')
 
-print("What would you like to do? Type 'create', 'start', 'stop', or 'reboot' ")
-selection = input()
+## print("What would you like to do? Type 'create', 'start', 'stop', or 'reboot'")
+## selection = input()
 
 instance_id = input("name of the instance (format is i-<>) or similar:")
 ##List instance
