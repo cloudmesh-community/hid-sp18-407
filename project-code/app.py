@@ -1,7 +1,8 @@
 import boto3
 from docopt import docopt
 
-"""
+doc = """Python Application
+
 Usage:
   app.py [-start=INSTANCE] 
   app.py [-stop=INSTANCE] 
@@ -13,8 +14,8 @@ Arguments:
   AMI       amazon ami
 
 Options:
-
 """
+
 from docopt import docopt
 ec2 = boto3.client('ec2')
 
