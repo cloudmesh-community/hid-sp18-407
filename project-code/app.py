@@ -27,14 +27,14 @@ def stop_instances(instanceID):
     print(instanceID," stopped")
         
 #reboot instance:
-def reboot_instance(amiID):
+def reboot_instance(instanceID):
     try:
-        response = ec2.reboot_instances(InstanceIds=[instance_id], DryRun=False)
+        response = ec2.reboot_instances(InstanceIds=[instanceID], DryRun=False)
         print('Success', response)
     except ClientError as e:
         print ('Error',e)
 
-    print(instance_id," rebooted")
+    print(instanceID," rebooted")
 
 # start instances:
 def start_instances(instanceID):
