@@ -1,0 +1,5 @@
+python>3.0
+boto3
+docopt
+botocore
+app
