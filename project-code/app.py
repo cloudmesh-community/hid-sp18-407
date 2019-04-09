@@ -5,15 +5,15 @@ ec2 = boto3.resource('ec2')
 
 ## Create a new instance
 def create_instances(amiID):
-    response=ec2.create_instances(ImageId=amiID, MinCount=1, MaxCount=1, InstanceType="t2.micro")
-    #response
-    print (response)
+    response = ec2.create_instances(ImageId=amiID, MinCount=1, MaxCount=1, InstanceType="t2.micro")
+    response
+    print(response)
     
 create_instances('ami-109cb475')
 
-## instance_id = input("name of the instance (format is i-<>) or similar:")
 ##List instance
 def list_instances():
+    ec2 = boto3.client('ec2')
     response = ec2.describe_instances()
     print(response)
 
