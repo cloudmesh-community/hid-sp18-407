@@ -1,5 +1,6 @@
 import boto3
 from docopt import docopt
+from botocore.exceptions import ClientError
 
 ec2 = boto3.resource('ec2')
 
@@ -9,45 +10,38 @@ def create_instances(amiID):
     response
     print(response)
     
-create_instances('ami-109cb475')
-
 ##List instance
 def list_instances():
     ec2 = boto3.client('ec2')
     response = ec2.describe_instances()
     print(response)
 
-## Create a new EC2 instance:
-#def create_instance(ami_image_id):
- #   ec2.create_instances(ImageId=ami_image_id, MinCount=1, MaxCount=1, InstanceType=t2.micro')
-  #  print("instance created:", ami_image_id)
-    
-
-# stop an Amazon instance:
-def stop_instance(instance_id):
+# stop an EC2 instance:
+def stop_instances(instanceID):
+    ec2 = boto3.client('ec2')
     try:
-        response = ec2.stop_instance(InstanceIds=[instance_id], DryRun=False)
+        response = ec2.stop_instances(InstanceIds=[instanceID], DryRun=False)
         print(response)
     except ClientError as e:
         print(e)
-
-    print(instance_id," stopped")
+    print(instanceID," stopped")
         
 #reboot instance:
-def reboot_instance(instance_id):
+def reboot_instance(amiID):
     try:
-        response = ec2.reboot_instances(Instance_Ids=[instance_id], DryRun=False)
+        response = ec2.reboot_instances(InstanceIds=[instance_id], DryRun=False)
         print('Success', response)
     except ClientError as e:
         print ('Error',e)
 
     print(instance_id," rebooted")
 
-## if selection == 'create':
-##    create_instance(ami_image_id)
-
-##if selection == 'start':
-##    start_instance(instance_id)
-
-#if __name__ == '__main__':
-   #main()
+# start instances:
+def start_instances(instanceID):
+    ec2 = boto3.client('ec2')
+    try:
+        response = ec2.start_instances(InstanceIds=instanceID, DryRun=False)
+        print(response)
+    except ClientError as e:
+        print(e)
+    print(instanceID, " Successfully started")
