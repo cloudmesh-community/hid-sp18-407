@@ -1,5 +1,6 @@
-python>3.0
+python
 boto3
 docopt
 botocore
 app
+awscli
