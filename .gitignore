@@ -39,6 +39,8 @@ Thumbs.db
 .DS_*
 _*
 .#*
+.*#*
+.*~
 *.html
 *.class
 *.iso

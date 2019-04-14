@@ -1,5 +1,4 @@
-python
-boto3
+boto3==1.9.130
 docopt
 botocore
 app

@@ -1,6 +1,12 @@
-using AWSIAM
-using AWSCore
+using HTTP
+function make_API_call(url)
+    try
+        response = HTTP.get(url)
+        return String(response.body)
+    catch e
+        return "Error occurred : $e"
+    end
+end
 
-aws=AWSCore.aws_config()
-
-iam(aws, "CreateUser",{"UserName" => "khickman"})
+response = make_API_call("http://jsonplaceholder.typicode.com/users")
+println(response)
