@@ -35,10 +35,10 @@ One suitable image is ```ami-109cb475```, which includes JuliaPro 0.6.2.1_mkl on
 ## SSH into your EC2 instance
 
 To SSH into your EC2 instance, requires a 2048-bit RSA key, which can be
-generated here as follows: To generate the required RSA key pair to SSH into
+generated here. To generate the required RSA key pair to SSH into
 your machine, issue the following command:
 
-```python aws_manager.py aws_key_gen <keyname>
+```python aws_manager.py aws_key_gen <keyname>```
 
 Where keyname is an easily-remembered string like 'khickman_'
 
