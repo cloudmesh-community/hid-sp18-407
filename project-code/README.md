@@ -62,7 +62,7 @@ aws ec2 authorize-security-group-ingress --group-id <group_id>
 --protocol tcp --port 22 --cidr 0.0.0.0/0
 
 Now the EC2 instance is ready for SSH.  For the Amazon Linux AMI, the user name
-is ```ec2-user```. Issue the following command to access the newly-created
+is ```ubuntu```. Issue the following command to access the newly-created
 instance where ```ec2-instance-name``` is the Public DNS name for the instance.
 This can be obtained from the EC2 console or by issuing the
 ```describe_instances``` command. 
