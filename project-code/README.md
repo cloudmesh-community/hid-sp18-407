@@ -53,13 +53,12 @@ options to expose the machine to outside requests, which can be found here
 
 Obtain your security group id's:
 
-aws ec2 describe-instance-attribute --instance-id i-0b8 e5e4abec4217b --attribute groupSet
+```aws ec2 describe-instance-attribute --instance-id i-0b8 e5e4abec4217b --attribute groupSet```
 
 Use a group_id from above that has the correct permissions to access your EC2
 instance:
 
-aws ec2 authorize-security-group-ingress --group-id <group_id>
---protocol tcp --port 22 --cidr 0.0.0.0/0
+```aws ec2 authorize-security-group-ingress --group-id <group_id> --protocol tcp --port 22 --cidr 0.0.0.0/0```
 
 Now the EC2 instance is ready for SSH.  For the Amazon Linux AMI, the user name
 is ```ubuntu```. Issue the following command to access the newly-created
