@@ -73,3 +73,17 @@ symbolic link between a command and the executable file in the ```bin```
 directory:
 
 ```sudo ln -s ~/JuliaPro-0.6.2.1/Julia/bin/julia /usr/local/bin/julia```
+
+Before starting Julia, first clone the repo containing the API files/services. 
+
+```mkdir api_test```
+
+```cd api_test```
+
+```git clone <url here>.  
+
+Now Julia is ready to be run on your machine, and you can issue the command: 
+
+```julia```
+
+
