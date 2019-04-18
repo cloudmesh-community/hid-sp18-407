@@ -7,7 +7,7 @@ owner:
 chapter: 
   - title: julia
     keyword: julia
-    url: https://github.com/cloudmesh-community/book/tree/master/chapters/prg/julia/julia-language.md
+    url: https://github.com/keithhickman08/book/tree/master/chapters/prg/julia
     github: https://github.com/keithhickman08/book
 project:
   - title: Virtualization on AWS with Julia
