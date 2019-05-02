@@ -13,6 +13,7 @@ project:
   - progress: 85
   - title: Virtualization on AWS with Julia
   - url: https://github.com/cloudmesh-community/hid-sp18-407/blob/master/project-code/README.md
+  - url: https://github.com/keithhickman08/JuliaData/README.md
 assignments: 
   - title: docopts
     url: https://github.com/cloudmesh-community/hid-sp18-407/blob/master/project-code/app.py
