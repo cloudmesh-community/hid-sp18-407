@@ -10,13 +10,14 @@ To implement:
 
 ```cd julia_aws```
 
-```git clone https://github.com/cloudmesh-community/hid-sp18-407.git```
+```git clone https://github.com/keithhickman08/aws_app.git```
 
 ```cd project-code```
 
 ```pip install -r requirements.txt```
 
 If you haven't already, you'll need to configure your aws credentials using 
+
 ```aws configure``` 
 
 Input your key, key id, default region (e.g. us-east-2), and output format (e.g. json). 
@@ -68,21 +69,25 @@ This can be obtained from the EC2 console or by issuing the
 
 ```ssh -i <path/to/pemfile.pem> <ubuntu@ec2-instance-name>```
 
+## Julia Setup
+
 The EC2 instance comes with Julia pre-downloaded. To run Julia, we must create a
 symbolic link between a command and the executable file in the ```bin```
 directory:
 
 ```sudo ln -s ~/JuliaPro-0.6.2.1/Julia/bin/julia /usr/local/bin/julia```
 
-Before starting Julia, first clone the repo containing the API files/services. 
+Before starting Julia, first make a directory and clone the repo containing the API files/services. 
 
 ```mkdir juliadata```
 
 ```cd juliadata```
 
-```git clone https://github.com/keithhickman08/JuliaData```  
+```git clone https://github.com/keithhickman08/JuliaData```
 
-Running a REST API service on your AWS instance is simple using the Genie package.  
+## Running a REST API Service in Julia
+
+Running a REST API service on your AWS instance is simple using the Genie package.  <https://github.com/essenciary/Genie.jl>
 
 Make a folder on your AWS instance called JuliaData and clone the following git repository into that folder.  Then ```cd``` into the directory.  Now Julia is ready to be run on your machine, and you can issue the command: 
 
