@@ -1,5 +1,0 @@
-boto3==1.9.130
-docopt
-botocore
-app
-awscli
