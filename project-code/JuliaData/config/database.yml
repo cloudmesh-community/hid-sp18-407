@@ -1,0 +1,31 @@
+env:
+
+dev:
+  adapter:
+  database:
+  host:
+  adapter:
+  database:
+  host:
+  username:
+  password:
+  port:
+  config:
+
+prod:
+  adapter:
+  database:
+  host:
+  username:
+  password:
+  port:
+  config:
+
+test:
+  adapter:
+  database:
+  host:
+  username:
+  password:
+  port:
+  config: 
