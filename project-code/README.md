@@ -70,14 +70,6 @@ traffic. Here we implement a simple, single access point. AWS does have many
 options to expose the machine to outside requests, which can be found here
 <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/authorizing-access-to-an-instance.html>
 
-Obtain your security group id's:
-
-```aws ec2 describe-instance-attribute --instance-id i-0b8 e5e4abec4217b --attribute groupSet```
-
-Use a group_id from above that has the correct permissions to access your EC2
-instance:
-
-```aws ec2 authorize-security-group-ingress --group-id <group_id> --protocol tcp --port 22 --cidr 0.0.0.0/0```
 
 Now the EC2 instance is ready for SSH.  For the Amazon Linux AMI, the user name
 is ```ubuntu```. Issue the following command to access the newly-created
@@ -85,15 +77,21 @@ instance where ```ec2-instance-name``` is the Public DNS name for the instance.
 This can be obtained from the EC2 console or by issuing the
 ```describe_instances``` command. 
 
-```ssh -i <path/to/pemfile.pem> <ubuntu@ec2-instance-name>```
+```ssh -i <path/to/pemfile.pem> <ubuntu@ec2-public-dns>```
+
+If SSH does not work, attempt the following steps. 
+
+1) Obtain your security group id's:
+
+```aws ec2 describe-instance-attribute --instance-id i-0b8 e5e4abec4217b --attribute groupSet```
+
+2) Use a group_id from above that has the correct permissions to access your EC2
+instance:
+
+```aws ec2 authorize-security-group-ingress --group-id <group_id> --protocol tcp --port 22 --cidr 0.0.0.0/0```
+
 
 ## Julia Setup
-
-The EC2 instance comes with Julia pre-downloaded. To run Julia, we must create a
-symbolic link between a command and the executable file in the ```bin```
-directory:
-
-```sudo ln -s ~/JuliaPro-0.6.2.1/Julia/bin/julia /usr/local/bin/julia```
 
 Before starting Julia, first make a directory and clone the repo containing the API files/services. 
 
@@ -103,13 +101,15 @@ Before starting Julia, first make a directory and clone the repo containing the 
 
 ```git clone https://github.com/keithhickman08/JuliaData```
 
+The EC2 instance comes with Julia pre-downloaded. To run Julia, simply type ```julia``` in the command line. If this fails, create a symbolic link between a command and the executable file in the ```bin```directory:
+
+```sudo ln -s ~/JuliaPro-0.6.2.1/Julia/bin/julia /usr/local/bin/julia```
+
 ## Running a REST API Service in Julia
 
 Running a REST API service on your AWS instance is simple using the Genie package.  <https://github.com/essenciary/Genie.jl>
 
-Make a folder on your AWS instance called JuliaData and clone the following git repository into that folder.  Then ```cd``` into the directory.  Now Julia is ready to be run on your machine, and you can issue the command: 
-
-```julia```
+Ensure Julia is running on your machine by issuing the ```julia``` command
 
 Julia must be in the App's home directory. You can check this in Julia by typing ```pwd()``` to print the working directory.  
 
