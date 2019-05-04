@@ -106,6 +106,8 @@ Install Docker, and modify user permissions to be able to install Docker and pul
 
 ```$ sudo apt install docker```
 
+Add your Ubuntu user to the Docker Group: 
+
 ```sudo usermod -a -G docker $USER```
 
 Then log out of the SSH session using Ctrl-D and log back in for the changes to take effect.  Alternatively, use sudo permissions as a temporary solution. 
