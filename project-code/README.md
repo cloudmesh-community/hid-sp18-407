@@ -12,7 +12,15 @@ To implement:
 
 ```git clone https://github.com/keithhickman08/aws_app.git```
 
+```cd aws_app```
+
+Or, if cloning from cloudmesh-community: 
+
+```git clone https://github.com/cloudmesh-community/hid-sp18-407.git```
+
 ```cd project-code```
+
+Then, regardless of source:
 
 ```pip install -r requirements.txt```
 
@@ -26,12 +34,20 @@ Now we can list existing EC2 instances, or create new ones and mount storage.  T
 
 ## Create an EC2 instance
 
+Before typing the first command, locate the key-pair you wish to use by issuing: 
+
+```aws ec2 describe-key-pairs```
+
 Using the following commands, create an EC2 instance of type t2.micro: 
 
 ```python aws_manager.py create_instance <ami-image> <keypairName>```
 
 There are currently 20 JuliaPro images listed on the Amazon EC2 community webpage.
 One suitable image is ```ami-109cb475```, which includes JuliaPro 0.6.2.1_mkl on Ubuntu 16.04 64 bit server.  To search for alternate JuliaPro images, access <https://us-east-2.console.aws.amazon.com/ec2>. Select "Launch Instance" and then search for "JuliaPro" in the searchbar.  20 images will show up in the "Community" tab.  Select one of the image ids and add it to the command above where ```<ami-image>``` is your image id.  
+
+## Start your EC2 instance
+
+```python aws_manager.py start_instances <instance_id>``` with no quotes or string literals. 
 
 ## SSH into your EC2 instance
 
@@ -47,19 +63,12 @@ Next, obtain the Public DNS for the recently-started instance, use
 
 ```python aws_manager.py get_dns <instance_id>```
 
+The Public DNS name may take a few moments to populate. 
+
 Now inbound (or ingress) SSH must be enabled on the machine to allow inbound SSH
 traffic. Here we implement a simple, single access point. AWS does have many
 options to expose the machine to outside requests, which can be found here
 <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/authorizing-access-to-an-instance.html>
-
-Obtain your security group id's:
-
-```aws ec2 describe-instance-attribute --instance-id i-0b8 e5e4abec4217b --attribute groupSet```
-
-Use a group_id from above that has the correct permissions to access your EC2
-instance:
-
-```aws ec2 authorize-security-group-ingress --group-id <group_id> --protocol tcp --port 22 --cidr 0.0.0.0/0```
 
 Now the EC2 instance is ready for SSH.  For the Amazon Linux AMI, the user name
 is ```ubuntu```. Issue the following command to access the newly-created
@@ -67,31 +76,66 @@ instance where ```ec2-instance-name``` is the Public DNS name for the instance.
 This can be obtained from the EC2 console or by issuing the
 ```describe_instances``` command. 
 
-```ssh -i <path/to/pemfile.pem> <ubuntu@ec2-instance-name>```
+```ssh -i <path/to/pemfile.pem> <ubuntu@ec2-public-dns>```
 
-## Julia Setup
+The first time SSH'ing into a instance, users will receive the following warning: 
 
-The EC2 instance comes with Julia pre-downloaded. To run Julia, we must create a
-symbolic link between a command and the executable file in the ```bin```
-directory:
+```The authenticity of host '<ip-address>.us-east-2.compute.amazonaws.com' can't be established. ECDSA key fingerprint is <fingerprint-id>.  Are you sure you want to continue connecting (yes/no)?```
 
-```sudo ln -s ~/JuliaPro-0.6.2.1/Julia/bin/julia /usr/local/bin/julia```
+Type yes and proceed. 
 
-Before starting Julia, first make a directory and clone the repo containing the API files/services. 
+If SSH does not work, attempt the following steps. 
 
-```mkdir juliadata```
+1) Obtain your security group id's:
 
-```cd juliadata```
+```aws ec2 describe-instance-attribute --instance-id i-0b8 e5e4abec4217b --attribute groupSet```
+
+2) Use a group_id from above that has the correct permissions to access your EC2
+instance:
+
+```aws ec2 authorize-security-group-ingress --group-id <group_id> --protocol tcp --port 22 --cidr 0.0.0.0/0```
+
+
+## Julia Setup on EC2
+
+Due to an package manager issue with the pre-installed Julia distribution (0.6.2), it is recommended to use an official Julia Docker image. 
+
+### Install Docker on EC2 Instance: 
+
+Install Docker, and modify user permissions to be able to install Docker and pull images: 
+
+```$ sudo apt install docker```
+
+```sudo usermod -a -G docker $USER```
+
+Then log out of the SSH session using Ctrl-D and log back in for the changes to take effect.  Alternatively, use sudo permissions as a temporary solution. 
+
+Pull the latest Julia image from Docker: 
+
+```docker pull julia```
+
+Before starting Julia, first clone the following repo containing the API files/services. 
 
 ```git clone https://github.com/keithhickman08/JuliaData```
 
-## Running a REST API Service in Julia
+or clone the previous cloudmesh directory above and ```cd``` into the project-code directory.  
 
-Running a REST API service on your AWS instance is simple using the Genie package.  <https://github.com/essenciary/Genie.jl>
+Although the EC2 instance comes with Julia v 0.6.2 pre-downloaded, the ```Pkg``` module in this version conflicts with several required packages. 
 
-Make a folder on your AWS instance called JuliaData and clone the following git repository into that folder.  Then ```cd``` into the directory.  Now Julia is ready to be run on your machine, and you can issue the command: 
+### Mounting a volume: 
 
-```julia```
+To run Julia in a Docker container with access to the cloned directory, simply type or copy the command below in the terminal. 
+
+```docker run --name MyJuliaApp -it --mount src=/home/ubuntu/JuliaData,target=/juliacontainer,type=bind julia```
+
+In this command, the ```src``` variable is the directory on the EC2 instance, and the target variable is the directory in the Docker container.  If the directory does not exist, Docker will create the directory. 
+
+Check to ensure the version is 1.0 or higher: 
+
+
+## Create a REST API Service in Julia
+
+Implementing a REST API service on your AWS instance is simple using the Genie package.  <https://github.com/essenciary/Genie.jl>
 
 Julia must be in the App's home directory. You can check this in Julia by typing ```pwd()``` to print the working directory.  
 
