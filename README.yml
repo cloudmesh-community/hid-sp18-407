@@ -10,7 +10,7 @@ chapter:
     url: https://github.com/keithhickman08/book/tree/master/chapters/prg/julia
     github: https://github.com/keithhickman08/book
 project:
-  - progress: 95
+  - progress: 100
   - title: Virtualization on AWS with Julia
   - url: https://github.com/keithhickman08/aws_app/README.md
   - url: https://github.com/keithhickman08/JuliaData/README.md
