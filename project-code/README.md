@@ -12,7 +12,15 @@ To implement:
 
 ```git clone https://github.com/keithhickman08/aws_app.git```
 
+```cd aws_app```
+
+Or, if cloning from cloudmesh-community: 
+
+```git clone https://github.com/cloudmesh-community/hid-sp18-407.git```
+
 ```cd project-code```
+
+Then, regardless of source:
 
 ```pip install -r requirements.txt```
 
@@ -26,12 +34,20 @@ Now we can list existing EC2 instances, or create new ones and mount storage.  T
 
 ## Create an EC2 instance
 
+Before typing the first command, locate the key-pair you wish to use by issuing: 
+
+```aws ec2 describe-key-pairs```
+
 Using the following commands, create an EC2 instance of type t2.micro: 
 
 ```python aws_manager.py create_instance <ami-image> <keypairName>```
 
 There are currently 20 JuliaPro images listed on the Amazon EC2 community webpage.
 One suitable image is ```ami-109cb475```, which includes JuliaPro 0.6.2.1_mkl on Ubuntu 16.04 64 bit server.  To search for alternate JuliaPro images, access <https://us-east-2.console.aws.amazon.com/ec2>. Select "Launch Instance" and then search for "JuliaPro" in the searchbar.  20 images will show up in the "Community" tab.  Select one of the image ids and add it to the command above where ```<ami-image>``` is your image id.  
+
+## Start your EC2 instance
+
+```python aws_manager.py start_instances <instance_id>``` with no quotes or string literals. 
 
 ## SSH into your EC2 instance
 
@@ -46,6 +62,8 @@ Where keyname is an easily-remembered string like 'khickman_'
 Next, obtain the Public DNS for the recently-started instance, use
 
 ```python aws_manager.py get_dns <instance_id>```
+
+The Public DNS name may take a few moments to populate. 
 
 Now inbound (or ingress) SSH must be enabled on the machine to allow inbound SSH
 traffic. Here we implement a simple, single access point. AWS does have many
