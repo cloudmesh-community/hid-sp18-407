@@ -79,6 +79,12 @@ This can be obtained from the EC2 console or by issuing the
 
 ```ssh -i <path/to/pemfile.pem> <ubuntu@ec2-public-dns>```
 
+The first time SSH'ing into a instance, users will receive the following warning: 
+
+```The authenticity of host '<ip-address>.us-east-2.compute.amazonaws.com' can't be established. ECDSA key fingerprint is <fingerprint-id>.  Are you sure you want to continue connecting (yes/no)?```
+
+Select yes and proceed. 
+
 If SSH does not work, attempt the following steps. 
 
 1) Obtain your security group id's:
@@ -101,9 +107,14 @@ Before starting Julia, first make a directory and clone the repo containing the 
 
 ```git clone https://github.com/keithhickman08/JuliaData```
 
-The EC2 instance comes with Julia pre-downloaded. To run Julia, simply type ```julia``` in the command line. If this fails, create a symbolic link between a command and the executable file in the ```bin```directory:
+or clone the previous cloudmesh directory above. 
+
+The EC2 instance comes with Julia v 0.6.2 pre-downloaded. To run Julia, simply type ```julia``` in the command line. If this fails, create a symbolic link between a command and the executable file in the ```bin```directory:
 
 ```sudo ln -s ~/JuliaPro-0.6.2.1/Julia/bin/julia /usr/local/bin/julia```
+
+## Update Pkg 
+Pkg is Julia's package manager, similar to ```pip``` in Python.  Since the Julia version installed is 0.6, Pkg needs to be updated before dependencies can be installed, which can take some time.
 
 ## Running a REST API Service in Julia
 
