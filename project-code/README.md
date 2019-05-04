@@ -70,7 +70,6 @@ traffic. Here we implement a simple, single access point. AWS does have many
 options to expose the machine to outside requests, which can be found here
 <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/authorizing-access-to-an-instance.html>
 
-
 Now the EC2 instance is ready for SSH.  For the Amazon Linux AMI, the user name
 is ```ubuntu```. Issue the following command to access the newly-created
 instance where ```ec2-instance-name``` is the Public DNS name for the instance.
@@ -83,7 +82,7 @@ The first time SSH'ing into a instance, users will receive the following warning
 
 ```The authenticity of host '<ip-address>.us-east-2.compute.amazonaws.com' can't be established. ECDSA key fingerprint is <fingerprint-id>.  Are you sure you want to continue connecting (yes/no)?```
 
-Select yes and proceed. 
+Type yes and proceed. 
 
 If SSH does not work, attempt the following steps. 
 
@@ -97,30 +96,46 @@ instance:
 ```aws ec2 authorize-security-group-ingress --group-id <group_id> --protocol tcp --port 22 --cidr 0.0.0.0/0```
 
 
-## Julia Setup
+## Julia Setup on EC2
 
-Before starting Julia, first make a directory and clone the repo containing the API files/services. 
+Due to an package manager issue with the pre-installed Julia distribution (0.6.2), it is recommended to use an official Julia Docker image. 
 
-```mkdir juliadata```
+### Install Docker on EC2 Instance: 
 
-```cd juliadata```
+Install Docker, and modify user permissions to be able to install Docker and pull images: 
+
+```$ sudo apt install docker```
+
+```sudo usermod -a -G docker $USER```
+
+Then log out of the SSH session using Ctrl-D and log back in for the changes to take effect.  Alternatively, use sudo permissions as a temporary solution. 
+
+Pull the latest Julia image from Docker: 
+
+```docker pull julia```
+
+Before starting Julia, first clone the following repo containing the API files/services. 
 
 ```git clone https://github.com/keithhickman08/JuliaData```
 
-or clone the previous cloudmesh directory above. 
+or clone the previous cloudmesh directory above and ```cd``` into the project-code directory.  
 
-The EC2 instance comes with Julia v 0.6.2 pre-downloaded. To run Julia, simply type ```julia``` in the command line. If this fails, create a symbolic link between a command and the executable file in the ```bin```directory:
+Although the EC2 instance comes with Julia v 0.6.2 pre-downloaded, the ```Pkg``` module in this version conflicts with several required packages. 
 
-```sudo ln -s ~/JuliaPro-0.6.2.1/Julia/bin/julia /usr/local/bin/julia```
+### Mounting a volume: 
 
-## Update Pkg 
-Pkg is Julia's package manager, similar to ```pip``` in Python.  Since the Julia version installed is 0.6, Pkg needs to be updated before dependencies can be installed, which can take some time.
+To run Julia in a Docker container with access to the cloned directory, simply type or copy the command below in the terminal. 
 
-## Running a REST API Service in Julia
+```docker run --name MyJuliaApp -it --mount src=/home/ubuntu/JuliaData,target=/juliacontainer,type=bind julia```
 
-Running a REST API service on your AWS instance is simple using the Genie package.  <https://github.com/essenciary/Genie.jl>
+In this command, the ```src``` variable is the directory on the EC2 instance, and the target variable is the directory in the Docker container.  If the directory does not exist, Docker will create the directory. 
 
-Ensure Julia is running on your machine by issuing the ```julia``` command
+Check to ensure the version is 1.0 or higher: 
+
+
+## Create a REST API Service in Julia
+
+Implementing a REST API service on your AWS instance is simple using the Genie package.  <https://github.com/essenciary/Genie.jl>
 
 Julia must be in the App's home directory. You can check this in Julia by typing ```pwd()``` to print the working directory.  
 
