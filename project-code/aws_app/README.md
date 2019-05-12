@@ -100,40 +100,25 @@ instance:
 
 Due to an package manager issue with the pre-installed Julia distribution (0.6.2), it is recommended to use an official Julia Docker image. 
 
-### Install Docker on EC2 Instance: 
+### Install Julia 1.0.1 on EC2 Instance: 
 
-Install Docker, and modify user permissions to be able to install Docker and pull images: 
-
-```$ sudo apt install docker```
-
-```sudo usermod -a -G docker $USER```
-
-Then log out of the SSH session using Ctrl-D and log back in for the changes to take effect.  Alternatively, use sudo permissions as a temporary solution. 
-
-Pull the latest Julia image from Docker: 
-
-```docker pull julia```
-
-Before starting Julia, first clone the following repo containing the API files/services. 
-
-```git clone https://github.com/keithhickman08/JuliaData```
-
-or clone the previous cloudmesh directory above and ```cd``` into the project-code directory.  
-
-Although the EC2 instance comes with Julia v 0.6.2 pre-downloaded, the ```Pkg``` module in this version conflicts with several required packages. 
-
-### Mounting a volume: 
-
-To run Julia in a Docker container with access to the cloned directory, simply type or copy the command below in the terminal. 
-
-```docker run --name MyJuliaApp -it --mount src=/home/ubuntu/JuliaData,target=/juliacontainer,type=bind julia```
-
-In this command, the ```src``` variable is the directory on the EC2 instance, and the target variable is the directory in the Docker container.  If the directory does not exist, Docker will create the directory. 
-
-Check to ensure the version is 1.0 or higher: 
-
-
+```bash
+$ sudo apt update
+$ sudo apt -y install build-essential
 ## Create a REST API Service in Julia
+```
+
+### Download and Extract Julia, then create symbolic link to Julia executable:
+
+```
+$ wget https://julialang-s3.julialang.org/bin/linux/x64/1.0/julia-1.0.1-linux-x86_64.tar.gz
+$ tar xvfz julia-1.0.1-linux-x86_64.tar.gz
+$ sudo ln -s /home/ubuntu/julia-1.0.1/bin/julia /usr/local/bin/julia
+```
+
+Now Julia will run using the symbolic link created in the last line of code by issuing ```julia``` in bash. 
+
+### Implement REST Service
 
 Implementing a REST API service on your AWS instance is simple using the Genie package.  <https://github.com/essenciary/Genie.jl>
 
