@@ -23,6 +23,7 @@ Week of:
 - 5/19 - 5/25: research cloudmesh4.yaml config
 - 5/26 - 6/1: Improve current architecture with Julia + AWS Interface; 
 - 6/2 - 6/8/19: Research Julia AWS Core; attend online meeting
+- 6/9 - 6/16/19: AWSCore.jl implementation of credentials using aws_config()
 
 
 
