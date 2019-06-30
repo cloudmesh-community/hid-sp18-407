@@ -25,6 +25,7 @@ Week of:
 - 6/2 - 6/8/19: Research Julia AWS Core; attend online meeting
 - 6/9 - 6/16/19: AWSCore.jl implementation of credentials using aws_config()
 - 6/17 - 6/23/19: yaml file created/read into Julia for config
+- 6/24 - 6/30/19: aws_config() working; read in config params, setting up ec2 instance
 
 
 
