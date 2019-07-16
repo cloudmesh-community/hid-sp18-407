@@ -26,7 +26,7 @@ Week of:
 - 6/9 - 6/16/19: AWSCore.jl implementation of credentials using aws_config()
 - 6/17 - 6/23/19: yaml file created/read into Julia for config
 - 6/24 - 6/30/19: aws_config() working; read in config params, setting up ec2 instance
-- 7/1 - 7/8/19: no progress
+- 7/1 - 7/8/19: Genie.jl package implemented; REST API created to retrieve, split train/test data 
 - 7/9 - 7/16/19: created Julia cloudformation template; reviewed AWS Cloudformation Template requirements 
 
 
