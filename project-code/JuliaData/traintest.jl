@@ -13,4 +13,5 @@ function traintest()
     writedlm(f, test, ",")
   end
 end
+
 traintest()
