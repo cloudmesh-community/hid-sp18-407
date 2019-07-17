@@ -1,0 +1,15 @@
+[database]
+user=dbuser
+password=abc123
+host=localhost
+
+[aws]
+heading=aws
+host=aws.amazon.com
+label=aws
+cmtype=ec2
+cm_type_version=null
+credentials.EC2_ACCESS_KEY=TBD
+credentials.EC2_SECRET_KEY=TBD
+credentialskeyname=TBD
+credentials.userid=TBD
