@@ -28,6 +28,9 @@ Week of:
 - 6/24 - 6/30/19: aws_config() working; read in config params, setting up ec2 instance
 - 7/1 - 7/8/19: Genie.jl package implemented; REST API created to retrieve, split train/test data 
 - 7/9 - 7/16/19: created Julia cloudformation template; reviewed AWS Cloudformation Template requirements 
+- 7/17 - 7/20/19: AWS not receiving Cloudformation data correctly
+- 7/21 - 7/27/19: 
+- 7/28 - 8/1: 
 
 
 
