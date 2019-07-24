@@ -1,4 +1,4 @@
-# Data Management with Julia on AWS
+# Data Management with Julia and AWS
 
 This project seeks to implement AWS functionality in Python using boto3.  We create an EC2 instance and mount storage, install and interact with Jupyter notebook over Julia, download data, run models, and store the output to the volume.  
 
