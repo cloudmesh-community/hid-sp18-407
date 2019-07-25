@@ -1,4 +1,4 @@
-# Data Management with Julia on AWS
+# Data Management with Julia and AWS
 
 This project seeks to implement AWS functionality in Python using boto3.  We create an EC2 instance and mount storage, install and interact with Jupyter notebook over Julia, download data, run models, and store the output to the volume.  
 
@@ -24,11 +24,7 @@ Then, regardless of source:
 
 ```pip install -r requirements.txt```
 
-If you haven't already, you'll need to configure your aws credentials using 
-
-```aws configure``` 
-
-Input your key, key id, default region (e.g. us-east-2), and output format (e.g. json). 
+If you haven't already, you'll need to configure your AWS credentials using the .pem files provided when your credentials were created.  AWS will look for those in the /.aws directory.   
 
 Now we can list existing EC2 instances, or create new ones and mount storage.  The default EC2 type for this project is t2.micro (free-tier eligible). Future implementations will allow for IAM policy creation, user creation, and IAM role assignments to users. 
 
@@ -140,7 +136,6 @@ Now we can prepare the data for a machine learning model in our AWS instance by 
 
 To run a Julia script, type 
 ```julia
-julia> using DelimitedFiles
 julia> include("traintest.jl")
 ```
 
