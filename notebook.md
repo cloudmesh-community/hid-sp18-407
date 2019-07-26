@@ -29,7 +29,7 @@ Week of:
 - 7/1 - 7/8/19: Genie.jl package implemented; REST API created to retrieve, split train/test data 
 - 7/9 - 7/16/19: created Julia cloudformation template; reviewed AWS Cloudformation Template requirements 
 - 7/17 - 7/20/19: AWS not receiving Cloudformation data correctly
-- 7/21 - 7/27/19: 
+- 7/21 - 7/27/19: switched to Julia 0.6; AWS functionality implemented; Docopts; REST API implemented
 - 7/28 - 8/1: 
 
 
